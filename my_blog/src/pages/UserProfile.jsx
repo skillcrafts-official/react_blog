@@ -109,10 +109,16 @@ function UserProfile() {
                     <Input name="email" type="text"
                         fieldValue={user.email}
                         variant="disabled" disabled></Input>
-                    <Input name="password" type="password"
-                        placeholder="Введите новый пароль"></Input>
-                    <Input name="password2" type="password"
-                        placeholder="Подтвердите новый пароль"></Input>
+                    <section className="flex flex-row justify-between">
+                        <Link to="/auth/email/"><ActionButton
+                            type="button">
+                            Изменить Email
+                        </ActionButton></Link>
+                        <Link to="/auth/password/"><ActionButton
+                            type="button">
+                            Изменить пароль
+                        </ActionButton></Link>
+                    </section>
                     <Input name="insta" type="text"
                         fieldValue={link_to_instagram}
                         placeholder="Профиль instagram"></Input>

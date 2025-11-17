@@ -11,8 +11,10 @@ import UserProfile from "./pages/UserProfile";
 import SearchResult from "./pages/SearchResult";
 import Portfolio from "./pages/Portfolio";
 import LogoutForm from "./pages/Auth/LogoutForm";
+import ChangeEmailForm from "./pages/Auth/ChangeEmailForm";
+import ChangePwdForm from "./pages/Auth/ChangePwdForm";
 
-import { confirmAction, loginAction, logoutAction, registrationAction } from "./actions/authActions";
+import { changeEmailAction, changePwdAction, confirmAction, loginAction, logoutAction, registrationAction } from "./actions/authActions";
 import { profileLoader } from "./loaders/profileLoaders";
 
 const router = createBrowserRouter([
@@ -44,6 +46,16 @@ const router = createBrowserRouter([
         path: "auth/confirm-email",
         element: <ConfirmEmailForm />,
         action: confirmAction
+      },
+      { 
+        path: "auth/email",
+        element: <ChangeEmailForm />,
+        action: changeEmailAction
+      },
+      { 
+        path: "auth/password",
+        element: <ChangePwdForm />,
+        action: changePwdAction
       },
       { path: "recovery", element: <Navigate to="/auth/recovery" /> },
       { path: "auth/recovery", element: <RecoveryForm /> },

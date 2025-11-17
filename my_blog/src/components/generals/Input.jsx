@@ -24,9 +24,9 @@ function Input({
 
     return (
         <>
-            <input { ...props } value={value}
+            <input 
                 className={`${baseStyles} ${borderStyle} ${placeholderStyle} ${variants[variant]}`}
-                onChange={handleInput}/>
+                onChange={handleInput} value={value} { ...props } />
             <ul>
                 {requirements.map((req) => (
                     <li className={fieldValue ? `font-roboto text-[12px] font-medium ${state[req.type] ? "text-[#00cf00ff]" : "text-[#ff2000ff]"}` : 'font-roboto text-[#ffffff37] text-[12px] font-normal'}

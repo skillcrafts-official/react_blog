@@ -68,13 +68,13 @@ export default function Sidebar() {
         {/* {logStatus === "login" ? (
         <> */}
             <div className='relative flex flex-col items-center justify-start w-full h-[230px] mb-3'>
-                <img className='w-[300px] max-h-[230px] object-cover object-center'
+                <img className='w-[300px] max-h-[180px] object-cover object-center'
                     src={state.profile.wallpaper === null ? (
                         "../src/assets/images/wallpaper.png"
                         ) : (`${API_BASE_URL}${state.profile.wallpaper}`
                     )} alt="wallpaper" />
-                <div className='absolute top-[140px]'>
-                    <img className='w-[98px] h-[98px] border-2 border-white object-cover rounded-full '
+                <div className='absolute top-[130px]'>
+                    <img className='w-[100px] h-[100px] border-3 border-white object-cover rounded-full '
                         src={`${API_BASE_URL}${state.profile.avatar}`} alt="avatar" />
                 </div>
             </div>

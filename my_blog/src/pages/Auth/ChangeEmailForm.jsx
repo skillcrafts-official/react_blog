@@ -93,7 +93,7 @@ function ChangeEmailForm() {
                     variant={email ? isEmailValid === true ? 'valid': 'invalid' : 'primary'}
                 />
                 <Input 
-                    type="email2"
+                    type="email"
                     name="email2"
                     value={email2}
                     placeholder="Введите новый Email"

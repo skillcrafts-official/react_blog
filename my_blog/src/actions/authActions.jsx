@@ -73,3 +73,39 @@ export async function logoutAction() {
     
     return redirect('/auth/login');
 }
+
+export async function changeEmailAction({ request }) {
+    const formData = await request.formData();
+    const email = formData.get('email2');
+    console.log(`email ${email}`)
+    const bodyData = { email }
+
+    const response = await fetch(
+        `${API_BASE_URL}${API_ENDPOINTS.AUTH.EMAIL}`,
+        API_DATA("PUT", bodyData)
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+        return redirect('/auth/confirm-email');
+    }
+    return redirect('/auth/confirm-email');
+}
+
+export async function changePwdAction({ request }) {
+    const formData = await request.formData();
+    const password = formData.get('password');
+    const bodyData = { password }
+
+    const response = await fetch(
+        `${API_BASE_URL}${API_ENDPOINTS.AUTH.PASSWORD}`,
+        API_DATA("PUT", bodyData)
+    );
+
+    const data = await response.json();
+
+    if (response.ok) {
+        return redirect('/profiles/');
+    }
+}

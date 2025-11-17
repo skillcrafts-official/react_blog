@@ -53,6 +53,8 @@ export const API_ENDPOINTS = {
   AUTH: {
     LOGIN: '/auth/user/token/',
     REGISTER: '/auth/user/',
+    EMAIL: '/auth/user/email/',
+    PASSWORD: '/auth/user/password/',
     CONFIRM: (userId) => `/auth/user/${userId}/confirm`,
     REFRESH: '/auth/token/refresh/',
     LOGOUT: '/auth/logout/',

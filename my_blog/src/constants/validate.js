@@ -2,7 +2,7 @@ export const EMAIL_REQUIREMENTS = [
     {
         type: "emailFormat",
         short_msg: `Формат соответствует Email`,
-        message: `Пароль должен быть не менее 8 символов`,
+        message: `Пример user_123@example.com`,
         validate: (email) => /^\w+@\w+\.\w+$/.test(email),
         required: true
     }
@@ -52,6 +52,16 @@ export const PASSWORD_MATCHED = [
         short_msg: `Пароли совпадают`,
         message: 'Пароли должны совпадать',
         validate: (pwd1, pwd2) => pwd1 === pwd2,
+        required: true
+    }
+]
+
+export const EMAIL_MATCHED = [
+    {
+        type: "isNotMatched",
+        short_msg: `Email должны отличаться`,
+        message: 'Email должны отличаться',
+        validate: (email1, email2) => email1 !== email2,
         required: true
     }
 ]
