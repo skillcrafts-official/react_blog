@@ -44,7 +44,8 @@ function Wallpaper({ variant = "wallpaper", changeWallpaper, src, ...props }) {
     };
 
     return (
-        <label htmlFor={variant}>
+        <label htmlFor={variant}
+            className={styles.label}>
             <img src={previewUrl ? previewUrl: src} alt="Preview"
                 className={`${styles.wallpaper} ${loading ? styles.effects : ''}`}/>
             <Span variant="link">

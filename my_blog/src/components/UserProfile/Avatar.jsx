@@ -46,7 +46,8 @@ function Avatar({ variant = "avatar", changeAvatar, src, ...props }) {
     };
 
     return (
-        <label htmlFor={variant}>
+        <label htmlFor={variant}
+            className={styles.label}>
             <img src={previewUrl ? previewUrl: src} alt="Preview"
                 className={`${styles.avatar} ${loading ? styles.effects : ''}`}/>
             <Span variant="link">
