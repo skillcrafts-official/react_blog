@@ -1,9 +1,4 @@
-* {
-    --valid-color: rgba(75, 255, 0, 0.75);
-    --invalid-color: rgba(255, 75, 0, 0.75);
-}
-
-textarea, input {
+.input {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     font-weight: 400;

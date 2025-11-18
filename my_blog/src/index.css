@@ -30,3 +30,8 @@
   --shadow-pagenav-base: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
   --shadow-pagenav-selected: 0px 0px 10px 0px rgba(58, 108, 234, 0.15);
 }
+
+* {
+    --valid-color: rgba(75, 255, 0, 0.75);
+    --invalid-color: rgba(255, 75, 0, 0.75);
+}

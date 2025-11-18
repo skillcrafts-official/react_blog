@@ -11,7 +11,7 @@ function Textarea({ variant = "primary", fieldValue = "", ...props }) {
     return (
         <>
             <textarea { ...props } value={value} onChange={handleInput} rows="5"
-                className={`${styles.effects} ${styles[variant]}`}>
+                className={`${styles.input} ${styles.effects} ${styles[variant]}`}>
             </textarea>
         </>
     )

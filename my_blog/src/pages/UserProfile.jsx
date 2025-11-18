@@ -89,7 +89,8 @@ function UserProfile() {
     }
 
     return (
-        <form onSubmit={handleSubmit}
+        <form className={styles.form}
+            onSubmit={handleSubmit}
             encType="multipart/form-data">
             <Title>Профиль</Title>
             <Input name="firstName" type="text"
@@ -101,7 +102,7 @@ function UserProfile() {
             <Input name="email" type="text"
                 fieldValue={user.email}
                 variant="disabled" disabled></Input>
-            <section>
+            <section className={styles.section}>
                 <Link to="/auth/email/"><ActionButton
                     type="button">
                     Изменить Email

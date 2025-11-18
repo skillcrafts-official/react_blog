@@ -1,11 +1,9 @@
 import styles from "./Title.module.css"
 
 function Title({ children, variant = "primary", ...props }) {
-    const baseStyles = `${styles.textStyle}`
-
     return (
         <h1
-            className={`${baseStyles} ${styles[variant]}`}
+            className={`${styles.title} ${styles[variant]}`}
             { ...props }
             >
             {children}

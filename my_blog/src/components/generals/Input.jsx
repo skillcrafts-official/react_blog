@@ -16,7 +16,7 @@ function Input({
     return (
         <>
             <input 
-                className={`${styles.effects} ${styles[variant]}`}
+                className={`${styles.input} ${styles.effects} ${styles[variant]}`}
                 onChange={handleInput} value={value} { ...props } />
             <ul>
                 {requirements.map((req) => (
