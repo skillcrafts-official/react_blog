@@ -2,7 +2,8 @@ import { API_BASE_URL, API_DATA, API_ENDPOINTS } from "../constants";
 
 export async function profileLoader() {
     const response = await fetch(
-        `${API_BASE_URL}${API_ENDPOINTS.USERS.PROFILE}`, API_DATA("GET")
+        `${API_BASE_URL}${API_ENDPOINTS.USERS.PROFILE(localStorage.getItem('auth:userId'))}`,
+        API_DATA("GET")
     );
 
     if (response.ok) {
@@ -18,4 +19,5 @@ export async function profileLoader() {
         statusCode: response.status,
         message: response.statusText,
     }
+    return;
 }
