@@ -1,6 +1,9 @@
 .title {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
+    font-size: 21px;
+    line-height: 21px;
+    margin: 30px 0px;
     color: #ffffffff;
 }
 
@@ -8,4 +11,8 @@
     font-size: 21px;
     line-height: 21px;
     margin: 30px 0px;
+}
+
+.center {
+    text-align: center;
 }

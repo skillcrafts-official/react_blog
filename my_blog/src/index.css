@@ -36,16 +36,56 @@
     --invalid-color: rgba(255, 75, 0, 0.75);
 }
 
+body {
+    display: flex;
+    justify-content: center;
+    background-color: #181818ff;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+div::-webkit-scrollbar {
+  display: none;
+}
+
+.subscriptions{
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior: contain;
+  gap: 3px;
+  padding: 20px;
+  cursor: grab;
+  /* pointer-events: all; */
+  scrollbar-width: none;
+}
+
+.subscriptions > * {
+  flex: 0 0 auto;
+  pointer-events: none; /* Если нужно чтобы события проходили */
+}
+
 .form {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    min-width: 200px;
-    max-width: 300px;
+    /* min-width: 200px; */
+    width: 300px;
 }
 
 .section {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    margin: 48px;
 }

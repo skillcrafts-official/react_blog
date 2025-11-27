@@ -1,0 +1,20 @@
+.stories{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* width: 100%; */
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior: contain;
+  gap: 3px;
+  /* padding: 20px; */
+  cursor: grab;
+  /* pointer-events: all; */
+  scrollbar-width: none;
+}
+
+.stories > * {
+    /* position: absolute; */
+    flex: 0 0 auto;
+    pointer-events: none; /* Если нужно чтобы события проходили */
+}
