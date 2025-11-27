@@ -3,30 +3,32 @@ import { redirect } from "react-router-dom";
 
 export async function registrationAction({ request }) {
     const formData = await request.formData();
-    const email = formData.get('email');
+    const primary_email = formData.get('email');
     const password = formData.get('password');
-    const bodyData = { email, password }
+    const bodyData = { primary_email, password }
 
     const response = await fetch(
         `${API_BASE_URL}${API_ENDPOINTS.AUTH.REGISTER}`, 
         API_DATA("POST", bodyData)
     );
 
+    const user = await response.json()
+
     if (response.ok) {
-        const user = await response.json()
         return {
             redirect: '/auth/confirm-email',
             success: true,
             user: user
         }
     }
+    return { success: false, error: user.message };
 }
 
 export async function loginAction({ request }) {
     const formData = await request.formData();
-    const email = formData.get('email');
+    const primary_email = formData.get('email');
     const password = formData.get('password');
-    const bodyData = { email, password }
+    const bodyData = { primary_email, password }
 
     const response = await fetch(
         `${API_BASE_URL}${API_ENDPOINTS.AUTH.LOGIN}`,
@@ -35,17 +37,24 @@ export async function loginAction({ request }) {
 
     const data = await response.json();
     
-    console.log(data);
-
     if (response.ok) {
         if (data.access) {
-            localStorage.setItem('auth:access_token', data.access);
+            localStorage.setItem('auth:accessToken', data.access);
         }
         if (data.refresh) {
-            localStorage.setItem('auth:refresh_token', data.refresh);
+            localStorage.setItem('auth:refreshToken', data.refresh);
         }
-        return redirect('/');
+        if (data.user_id) {
+            localStorage.setItem('auth:userId', data.user_id);
+        }
+        return { 
+            success: true, 
+            userData: data,
+            redirect: '/'
+        };
     }
+    
+    return { success: false, error: data.message };
 }
 
 export async function confirmAction({ request }) {
@@ -76,9 +85,9 @@ export async function logoutAction() {
 
 export async function changeEmailAction({ request }) {
     const formData = await request.formData();
-    const email = formData.get('email2');
-    console.log(`email ${email}`)
-    const bodyData = { email }
+    const primary_email = formData.get('email2');
+    console.log(`email ${primary_email}`)
+    const bodyData = { primary_email }
 
     const response = await fetch(
         `${API_BASE_URL}${API_ENDPOINTS.AUTH.EMAIL}`,
@@ -94,6 +103,7 @@ export async function changeEmailAction({ request }) {
 }
 
 export async function changePwdAction({ request }) {
+    const userId = localStorage.getItem('auth:userId')
     const formData = await request.formData();
     const password = formData.get('password');
     const bodyData = { password }
@@ -106,6 +116,6 @@ export async function changePwdAction({ request }) {
     const data = await response.json();
 
     if (response.ok) {
-        return redirect('/profiles/');
+        return redirect(`/profiles/${userId}/`);
     }
 }
