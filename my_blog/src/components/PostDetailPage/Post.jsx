@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import Comments from "../generals/Comments"
+import Comments from "../singles/Comments"
 
 function Post() {
     return (
