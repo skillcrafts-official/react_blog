@@ -1,7 +1,9 @@
-# Restrictions and rights
-## License
+# Restrictions rights and demonstrations
+### License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+### Demo
+**Ссылка:** https://react-blog-kappa-plum.vercel.app/ [![Live Demo](https://img.shields.io/badge/🌐_Живое_демо-000?style=for-the-badge)](https://react-blog-kappa-plum.vercel.app/)
 
 # React + Vite
 
