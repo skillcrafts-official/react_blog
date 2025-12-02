@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'https://portfolio-blog-api.ru';
+export const API_BASE_URL = 'https://portfolio-blog-api.ru/';
 export const FILE_SERVER_BASE_URL = 'http://localhost:9000'
 
 export function API_DATA(method, bodyData = null, options = {}) {
