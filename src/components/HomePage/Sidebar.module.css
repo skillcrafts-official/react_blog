@@ -1,0 +1,45 @@
+.wallpaper {
+    display: flex;
+    position: absolute;
+    width: 800px;
+    height: 210px;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.avatar {
+    display: flex;
+    position: absolute;
+    /* left: 130px; */
+    top: 140px;
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border: 3px solid white;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.sidebox {
+    position: relative;
+    width: 800px;
+    height: 280px;
+    border-bottom-left-radius: 70px;
+    border-bottom-right-radius: 12px;
+    box-shadow: var(--shadow-sidebar);
+    background-color: #202020ff;
+    z-index: 0;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 150px;
+    top: 210px;
+    height: 70px;
+    z-index: 0;
+}
