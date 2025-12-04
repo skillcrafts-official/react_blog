@@ -23,8 +23,10 @@
   --text-button--font-weight: 500;
   --text-button--line-height: 100%;
   --text-button--letter-spacing: 0%;
-  --shadow-sidebar: 5px 0px 15px 0px rgba(5, 5, 5, 0.1);
-  --shadow-header: 0px 5px 22px 0px rgba(0, 0, 0, 0.25);
+  /* --shadow-sidebar: 5px 0px 15px 0px rgba(5, 5, 5, 0.1); */
+  --shadow-sidebar: 0px 0px 15px 1px #dededeff;
+  /* --shadow-header: 0px 5px 22px 0px rgba(0, 0, 0, 0.25); */
+  --shadow-header: 0px 0px 15px 1px #dededeff;
   --shadow-add-post: 0px 15px 25px 0px rgba(0, 0, 0, 0.45);
   --shadow-simple-post: 0px 15px 25px 0px rgba(0, 0, 0, 0.35);
   --shadow-pagenav-base: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
