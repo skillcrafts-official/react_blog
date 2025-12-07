@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       },
       { path: ROUTES.POSTS.EDITOR, element: <PostEditor/> },
       { 
-        path: ROUTES.PROFILES.EDITOR,
+        path: 'profiles/profileId',//ROUTES.PROFILES.EDITOR,
         element: <Profile />,
         loader: profileLoader
       },
