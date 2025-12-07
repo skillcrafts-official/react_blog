@@ -14,7 +14,7 @@ function Home() {
   // console.log(loaderData?.data[0])
   const {
     id, title, post, status, published_at, created_at, updated_at, deleted_at, is_blocked, is_deleted, author, tag_names
-  } = loaderData ? loaderData.data[0] : [];
+  } = loaderData.data ? loaderData.data[0] : [];
   // const { setUserId, accessToken } = useGlobalState();
   // const { user } = useLoaderData.data;
 
