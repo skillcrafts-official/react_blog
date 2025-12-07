@@ -9,6 +9,14 @@ export default defineConfig({
     tailwindcss(),
   ],
   build: {
-    outDir: 'dist'
+    outDir: 'dist',
+    rollupOptions: {
+      input: {
+        main: 'index.html'
+      }
+    }
+  },
+  server: {
+    historyApiFallback: true  // Важно для SPA
   }
 })
