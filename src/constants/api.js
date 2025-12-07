@@ -69,7 +69,7 @@ export const API_ENDPOINTS = {
     MEDIA: '/profiles/media',
   },
   POSTS: {
-    LIST: '/posts/',
+    LIST: '/posts/list/',
     DETAIL: (postId) => `/posts/${postId}/`,
     EDITOR: '/post-editor/'
   },
