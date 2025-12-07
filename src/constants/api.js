@@ -99,14 +99,14 @@ export const ROUTES = {
   LOGIN: '/login',
   REGISTER: '/registration',
   PROFILES: {
-    LIST: '/profiles/',
-    DETAIL: '/profiles/:profileId/',
-    EDITOR: '/profiles/:profileId/'
+    LIST: '/profiles',
+    DETAIL: '/profiles/:profileId',
+    EDITOR: '/profiles/:profileId'
   },
   POSTS: {
     LIST: '/posts/',
-    DETAIL: '/posts/:postId/',
-    EDITOR: '/post-editor/',
+    DETAIL: '/posts/:postId',
+    EDITOR: '/post-editor',
   }
 };
 
