@@ -74,6 +74,7 @@ export default function Sidebar() {
         return <p className='text-[#dededeff]'>Failed to fetch data. Please try again!</p>
     }
 
+    console.log(state.profile.wallpaper);
     return (
         <div className={styles.sidebox}>
             <ProtectedImage
