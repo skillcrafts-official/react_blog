@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form } from "react-router-dom";
-import { PASSWORD_MATCHED, PASSWORD_REQUIREMENTS } from "../../constants";
-import { CHAR_REPLACER } from "../../components/utils";
-import Title from "../../components/singles/Title";
-import Input from "../../components/singles/Input";
-import ActionButton from "../../components/singles/ActionButton";
+import { PASSWORD_MATCHED, PASSWORD_REQUIREMENTS } from "@/constants";
+import { CHAR_REPLACER } from "@/components/utils";
+import Title from "@/components/ui/Label/Title";
+import Input from "@/components/ui/Input/Input";
+import ActionButton from "@/components/ui/Button/ActionButton";
+import { useGlobalState } from "@/lib/providers/GlobalProvider";
 
 function ChangePwdForm() {
+    const [title, setTitle] = useState('');
     const [oldPassword, setOldPassword] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
@@ -71,7 +73,7 @@ function ChangePwdForm() {
     const isOldPasswordValid = Object.values(pwdMatched).every((value) => value);
 
     return (
-        <Form className="form"
+        <Form className="flex flex-col gap-7 w-100"
             method="PUT" 
             action="/auth/password"
             >

@@ -1,0 +1,56 @@
+.label {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.span {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #d2d2d2ff;
+    text-wrap-mode: nowrap;
+    /* align-items: center; */
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+}
+
+.wallpaper {
+    max-height: 230px;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+}
+
+.effects {
+    animation: compressAnimation 2s ease-in-out infinite;
+}
+
+@keyframes compressAnimation {
+    0% {
+        filter: brightness(0.85) blur(1.5px);
+        opacity: 0.8;
+        transform: scale(0.98);
+    }
+    50% {
+        filter: brightness(0.95) blur(0.5px);
+        opacity: 0.95;
+        transform: scale(1.01);
+    }
+    100% {
+        filter: brightness(0.85) blur(1.5px);
+        opacity: 0.8;
+        transform: scale(0.98);
+    }
+}

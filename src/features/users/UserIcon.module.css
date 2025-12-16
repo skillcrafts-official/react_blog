@@ -1,0 +1,9 @@
+.avatar {
+    display: flex;
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border: 3px solid #828282ff;
+    border-radius: 50%;
+    z-index: 0;
+}

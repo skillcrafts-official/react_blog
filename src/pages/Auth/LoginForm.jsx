@@ -1,10 +1,10 @@
 import { Link, Form, useActionData, useNavigate } from "react-router-dom"
 
-import ActionButton from "../../components/singles/ActionButton";
-import Input from "../../components/singles/Input";
-import Title from "../../components/singles/Title";
+import ActionButton from "@/components/ui/Button/ActionButton";
+import Input from "@/components/ui/Input/Input";
+import Title from "@/components/ui/Label/Title";
 import { useEffect } from "react";
-import { useGlobalState } from "../../components/GlobalProvider";
+import { useGlobalState } from "@/lib/providers/GlobalProvider";
 
 function LoginForm() {
     const actionData = useActionData();
@@ -27,13 +27,17 @@ function LoginForm() {
         handleLogStatus("login");
     }
     return (
-        <div className="form">
+        <div className="flex flex-col items-center gap-3 justify-center w-[800px]">
             <Form 
-                className="form"
+                className="flex flex-col gap-3 w-75"
                 method="POST"
                 action="/auth/login"
                 >
                 <Title>Вход</Title>
+                <section className="section">
+                    <Link to={'/recovery/'} className="font-roboto text-white text-[12px] leading-[100%] font-normal">восстановление</Link>
+                    <Link to={'/registration/'} className="font-roboto text-white text-[12px] leading-[100%] font-normal">регистрация</Link>
+                </section>
                 <Input 
                     type="email"
                     name="email"
@@ -51,10 +55,7 @@ function LoginForm() {
                     onClick={handleLogin}
                     >Войти</ActionButton>
             </Form>
-            <section className="section">
-                <Link to={'/recovery/'} className="font-roboto text-white text-[12px] leading-[100%] font-normal">восстановление</Link>
-                <Link to={'/registration/'} className="font-roboto text-white text-[12px] leading-[100%] font-normal">регистрация</Link>
-            </section>
+            
         </div>
     );
 }

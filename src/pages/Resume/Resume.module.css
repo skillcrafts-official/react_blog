@@ -1,0 +1,43 @@
+.resume {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+        "first third fourth"
+        "second second second";
+    width: 800px;
+    padding: 10px;
+    gap: 20px;
+}
+
+.first {
+    grid-area: first;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+
+.second {
+    grid-area: second;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+
+.third {
+    grid-area: third;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+
+.fourth {
+    grid-area: fourth;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}

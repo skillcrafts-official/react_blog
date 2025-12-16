@@ -3,7 +3,7 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom"
 import { extensions } from "../../constants/tipTapExtensions";
-import { useGlobalState } from '../../components/GlobalProvider';
+import { useGlobalState } from '../../lib/providers/GlobalProvider';
 
 function PostPreview({ poster, title, textPreview, postedDate, tags, linkName, linkTo, post }) {
     const { setSelectedPost } = useGlobalState();
@@ -18,24 +18,24 @@ function PostPreview({ poster, title, textPreview, postedDate, tags, linkName, l
       immediately: false,
     });
 
-    useEffect(() => {
-        if (isMounted && editorRef.current && !editor) {
-            if (editor && textPreview) {
-                editor.commands.setContent(textPreview);
-            }
-            const getTextPreview = () => {
-                const view = editor.view;
-                const firstParagraph = view.dom.querySelector('p');
+    // useEffect(() => {
+    //     if (isMounted && editorRef.current && !editor) {
+    //         if (editor && textPreview) {
+    //             editor.commands.setContent(textPreview);
+    //         }
+    //         const getTextPreview = () => {
+    //             const view = editor.view;
+    //             const firstParagraph = view.dom.querySelector('p');
 
-                setPostPreview(firstParagraph?.textContent || firstParagraph?.innerText || '');
-            };
-            getTextPreview();
-        }
-    }, [isMounted, editor, textPreview]);    
+    //             setPostPreview(firstParagraph?.textContent || firstParagraph?.innerText || '');
+    //         };
+    //         getTextPreview();
+    //     }
+    // }, [isMounted, editor, textPreview]);    
 
-    if (!isMounted) {
-        return <div>Загрузка редактора...</div>;
-    }
+    // if (!isMounted) {
+    //     return <div>Загрузка редактора...</div>;
+    // }
 
     return (
         <div className="flex flex-col w-full rounded-t-[12px]">

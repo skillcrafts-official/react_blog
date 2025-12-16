@@ -1,10 +1,10 @@
 import { Link, Form, useActionData, useNavigate } from "react-router-dom"
-import { EMAIL_REQUIREMENTS, PASSWORD_REQUIREMENTS, PASSWORD_MATCHED } from "../../constants";
-import ActionButton from "../../components/singles/ActionButton";
-import Input from "../../components/singles/Input";
-import Title from "../../components/singles/Title";
+import { EMAIL_REQUIREMENTS, PASSWORD_REQUIREMENTS, PASSWORD_MATCHED } from "@/constants";
+import ActionButton from "@/components/ui/Button/ActionButton";
+import Input from "@/components/ui/Input/Input";
+import Title from "@/components/ui/Label/Title";
 import { useEffect, useState } from "react";
-import { CHAR_REPLACER } from "../../components/utils";
+import { CHAR_REPLACER } from "@/components/utils";
 
 function RegistrationFrom() {
     const actionData = useActionData();
@@ -106,14 +106,17 @@ function RegistrationFrom() {
 
     return (
         // <div className="flex flex-col gap-5 m-12 items-center max-w-70">
-        <div className="form">
+        <div className="flex flex-col items-center gap-3 justify-center w-[800px]">
             <Form 
-                // className="flex flex-col gap-5 items-center justify-center w-full"
-                className="form"
+                className="flex flex-col gap-3 w-75"
                 method="POST" 
                 action="/auth/registration"
                 >
                 <Title>Регистрация</Title>
+                <div className="section">
+                    <Link to={'/recovery/'} className="font-roboto text-white text-[12px] leading-[100%] font-normal">восстановление</Link>
+                    <Link to={'/login/'} className="font-roboto text-white text-[12px] leading-[100%] font-normal">вход</Link>
+                </div>
                 <Input 
                     type="email"
                     name="email"
@@ -158,10 +161,7 @@ function RegistrationFrom() {
                     Зарегистрироваться
                 </ActionButton>
             </Form>
-            <div className="section">
-                <Link to={'/recovery/'} className="font-roboto text-white text-[12px] leading-[100%] font-normal">восстановление</Link>
-                <Link to={'/login/'} className="font-roboto text-white text-[12px] leading-[100%] font-normal">вход</Link>
-            </div>
+            
         </div>
     );
 }

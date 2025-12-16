@@ -6,10 +6,22 @@
         "jsx": "react-jsx",
         "allowImportingTsExtensions": true,
         "strictNullChecks": true,
-        "strictFunctionTypes": true
+        "strictFunctionTypes": true,
+        "baseUrl": ".",
+        "paths": {
+          "@/*": ["./src/*"],
+          "@components/*": ["src/components/*"],
+          "@pages/*": ["./src/pages/*"],
+          "@utils/*": ["./src/utils/*"],
+          "@hooks/*": ["./src/hooks/*"],
+          "@assets/*": ["./src/assets/*"],
+          "@api/*": ["./src/api/*"],
+          "@styles/*": ["./src/styles/*"],
+          "@archive/*": ["./src/archive/*"]
+        }
     },
     "exclude": [
-        "node_modules",
-        "**/node_modules/*"
-    ]
+        "node_modules", "**/node_modules/*", "dist"
+    ],
+    "include": ["src/**/*"],
 }

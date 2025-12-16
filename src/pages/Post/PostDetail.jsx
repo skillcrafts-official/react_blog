@@ -1,9 +1,9 @@
 import { Link, useLoaderData } from "react-router-dom";
-import Comments from "../../components/singles/Comments";
+import Comments from "@/archive/singles/Comments";
 import { EditorContent, useEditor } from "@tiptap/react";
-import { extensions } from "../../constants/tipTapExtensions";
+import { extensions } from "@/constants/tipTapExtensions";
 import { useEffect } from "react";
-import ActionButton from "../../components/singles/ActionButton";
+import ActionButton from "@/components/ui/Button/ActionButton";
 
 function PostDetail() {
     const loaderData = useLoaderData();

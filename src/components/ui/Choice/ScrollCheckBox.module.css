@@ -1,0 +1,15 @@
+.checkbox {
+    display: inline;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 0 5px;
+    border: 2px solid;
+    color: #d2d2d2ff;
+    text-align: center;
+}
+
+.checkbox.nothing {
+    color: #ffffff37;
+}
