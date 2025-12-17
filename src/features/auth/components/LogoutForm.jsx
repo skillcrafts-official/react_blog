@@ -1,7 +1,7 @@
 import { Link, Form, useNavigate } from "react-router-dom";
-import Title from "../../components/ui/Label/Title";
-import ActionButton from "../../components/ui/Button/ActionButton";
-import { useGlobalState } from "../../lib/providers/GlobalProvider";
+import Title from "../../../components/ui/Label/Title";
+import ActionButton from "../../../components/ui/Button/ActionButton";
+import { useGlobalState } from "../../../lib/providers/GlobalProvider";
 
 function LogoutForm() {
     const {

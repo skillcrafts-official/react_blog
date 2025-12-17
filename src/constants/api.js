@@ -160,6 +160,11 @@ export const LOCATIONS = {
 }
 
 export const ROUTES = {
+  AUTH: {
+    LOGIN: `/auth/login`,
+    LOGOUT: `/auth/logout`,
+    REGISTRATION: `/auth/registration`,
+  },
   HOME: '/',
   LOGIN: '/login',
   REGISTER: '/registration',

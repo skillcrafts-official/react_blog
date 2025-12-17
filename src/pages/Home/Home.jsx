@@ -1,3 +1,5 @@
+import styles from './Home.module.css'
+
 import { Link, useLoaderData } from "react-router-dom";
 import { ROUTES } from "@/constants";
 
@@ -33,9 +35,9 @@ function Home() {
   // }, [accessToken])
 
   return (
-    <div className="">
+    <div className={styles.home}>
         {/* <main className="flex flex-col w-full items-center max-w-150"> */}
-        <main className="flex flex-col gap-7 items-center w-200">
+        <main className="flex flex-col gap-7 items-center">
             {/* <Stories></Stories> */}
             <PostPreview
               poster=""

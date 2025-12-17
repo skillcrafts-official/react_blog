@@ -11,7 +11,7 @@ import { useGlobalState } from '@/lib/providers/GlobalProvider';
 import ActionButton from '@/components/ui/Button/ActionButton';
 import ProtectedImage from '@/components/ui/Image/ProtectedImage';
 import ReactModal from 'react-modal';
-import LogoutForm from '@/pages/Auth/LogoutForm';
+import LogoutForm from '@/features/auth/components/LogoutForm';
 import Span from '@/components/ui/Label/Span';
 
 const initialState = {

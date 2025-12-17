@@ -27,7 +27,7 @@ function LoginForm() {
         handleLogStatus("login");
     }
     return (
-        <div className="flex flex-col items-center gap-3 justify-center w-[800px]">
+        <div className="flex flex-col items-center gap-3 justify-center">
             <Form 
                 className="flex flex-col gap-3 w-75"
                 method="POST"

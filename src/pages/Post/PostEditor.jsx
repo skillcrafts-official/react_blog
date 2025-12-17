@@ -1,3 +1,5 @@
+import styles from './PostEditor.module.css'
+
 import { EditorContent, useEditor, useEditorState } from '@tiptap/react'
 import { FloatingMenu, BubbleMenu } from '@tiptap/react/menus'
 import StarterKit from '@tiptap/starter-kit'
@@ -134,8 +136,8 @@ function PostEditor() {
     })
     
     return (
-      <div className="flex flex-col my-7 bg-[#202020ff] shadow-simple-post rounded-[12px] w-200">
-        <div className="sticky flex flex-col gap-10 w-200 p-6 bg-[#202020ff] rounded-t-[12px]">
+      <div className={`flex flex-col my-7 bg-[#202020ff] shadow-simple-post rounded-[12px] ${styles['post-editor']}`}>
+        <div className="sticky flex flex-col gap-10 p-6 bg-[#202020ff] rounded-t-[12px]">
         {/* <div className='flex flex-col gap-10 w-200 my-7'> */}
             <TipTapEditorToolbar editor={editor} editorState={editorState}/>
             {/* <TipTapFloatingMenu editor={editor} editorState={editorState}/> */}
@@ -143,7 +145,7 @@ function PostEditor() {
             
         </div>
         <EditorContent editor={editor}/>
-        <div className="flex flex-col gap-10 w-200 p-6">
+        <div className="flex flex-col gap-10 p-6">
             <section className='section'>
                 <ActionButton>Сохранить</ActionButton>
                 <ActionButton>Опубликовать</ActionButton>

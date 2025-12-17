@@ -1,0 +1,21 @@
+.menubox {
+    /* position: relative; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 800px;
+    /* height: 225px; */
+    /* border-radius: 0 12px; */
+    border-radius: 0 0 12px 12px;
+    box-shadow: var(--shadow-header);
+    background-color: #0d0d0dff;
+    padding: 16px;
+    /* z-index: 0; */
+    @media (max-width: 800px) {
+        width: 100vw;
+        /* height: 225px; */
+    }
+}
+
+/* flex flex-row justify-between w-dvw items-center p-4 bg-[#0d0d0dff] shadow-header rounded-b-[12px] */

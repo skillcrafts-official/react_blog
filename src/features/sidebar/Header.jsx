@@ -1,3 +1,5 @@
+import styles from './Header.module.css'
+
 import { NavLink, useActionData, useLocation, useNavigate, useSearchParams } from "react-router-dom"
 import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -24,7 +26,7 @@ function Header() {
         selectedPost,
         handleSidebarModalView
     } = useGlobalState();
-    // const hasToken = localStorage.getItem('refresh_token')
+    const hasToken = localStorage.getItem('auth:accessToken')?.length > 0 ? true : false
     
     // const handleKeyDown = (e) => {
     //     if (e.key === 'Enter') {
@@ -62,7 +64,8 @@ function Header() {
     }
 
     return (
-        <div className="flex flex-row md:w-200 justify-between items-center p-4 bg-[#0d0d0dff] shadow-header rounded-b-[12px]">
+        // <div className="flex flex-row justify-between w-dvw items-center p-4 bg-[#0d0d0dff] shadow-header rounded-b-[12px]">
+        <div className={styles.menubox}>
             <nav className='header'>
                 <ul className="flex flex-row flex-wrap gap-6 justify-center items-center">
                     <li className="text-white text-[11px] font-[400] font-roboto uppercase">
@@ -71,33 +74,33 @@ function Header() {
                             Главная
                         </NavLink>
                     </li>
-                    <li className="text-white text-[11px] font-[400] font-roboto uppercase">
+                    {hasToken && <li className="text-white text-[11px] font-[400] font-roboto uppercase">
                         <NavLink to={LINKS.PROFILES.DETAIL(localStorage.getItem('auth:userId'))}
                             onClick={handleProfileClick}
                             >
                             Мой Профиль
                         </NavLink>
-                    </li>
-                    <li className="text-white text-[11px] font-[400] font-roboto uppercase">
+                    </li>}
+                    {hasToken && <li className="text-white text-[11px] font-[400] font-roboto uppercase">
                         <NavLink to={LINKS.RESUME.DETAIL(localStorage.getItem('auth:userId'))}
                             // onClick={handleProfileClick}
                             >
                             Моё резюме
                         </NavLink>
-                    </li>
-                    <li className="text-white text-[11px] font-[400] font-roboto uppercase">
+                    </li>}
+                    {hasToken && <li className="text-white text-[11px] font-[400] font-roboto uppercase">
                         <NavLink to={'/test/'}
                             // to={LINKS.RESUME.DETAIL(localStorage.getItem('auth:userId'))}
                             // onClick={handleProfileClick}
                             >
                             Мои дела
                         </NavLink>
-                    </li>
-                    <li className="text-white text-[11px] font-[400] font-roboto uppercase">
+                    </li>}
+                    {hasToken && <li className="text-white text-[11px] font-[400] font-roboto uppercase">
                         <NavLink to={ROUTES.SUBSCRIBES.LIST}>
                             Подписки
                         </NavLink>
-                    </li>
+                    </li>}
                 </ul>
             </nav>
             <ul className="flex flex-row flex-wrap gap-6 justify-center items-center">
@@ -109,21 +112,21 @@ function Header() {
             </ul>
             <nav className='header'>
                 <ul className="flex flex-row flex-wrap gap-6 justify-center items-center">
-                    <li className="text-white text-[11px] font-[400] font-roboto uppercase">
+                    {hasToken && <li className="text-white text-[11px] font-[400] font-roboto uppercase">
                         <NavLink to={ROUTES.POSTS.EDITOR}>
                             Создать статью
                         </NavLink>
-                    </li>
-                    <li className="text-white text-[11px] font-[400] font-roboto uppercase">
+                    </li>}
+                    {hasToken && <li className="text-white text-[11px] font-[400] font-roboto uppercase">
                         <NavLink to={`/search${searchParams ? '?' : ''}${searchParams}`} 
                         // className="text-white text-[11px] font-[400] font-roboto uppercase"
                             >
                             Найти
                         </NavLink>
-                    </li>
+                    </li>}
                     <li className="text-white text-[11px] font-[400] font-roboto uppercase">
                         {isLogin == "logout" ? (
-                            <NavLink to={"/login"}
+                            <NavLink to={"/auth/login"}
                                 onClick={() => handleSidebarModalView(true)}>
                                 Войти
                             </NavLink>

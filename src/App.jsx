@@ -4,16 +4,16 @@ import { LOCATIONS, ROUTES } from "./constants";
 import Layout from "./components/Layout";
 import Home from "./pages/Home/Home";
 // import PostDetail from "./pages/Post/PostDetail";
-import LoginForm from "./pages/Auth/LoginForm";
-import RegistrationFrom from "./pages/Auth/RegistrationForm";
-import ConfirmEmailForm from "./pages/Auth/ConfirmEmailForm";
-import RecoveryForm from "./pages/Auth/RecoveryForm";
+import LoginForm from "./features/auth/components/LoginForm";
+import RegistrationFrom from "./features/auth/components/RegistrationForm";
+import ConfirmEmailForm from "./features/auth/components/ConfirmEmailForm";
+import RecoveryForm from "./features/auth/components/RecoveryForm";
 import Profile from "./pages/Profile/Profile";
 import SearchResult from "./archive/SearchResult";
 import Portfolio from "./archive/Portfolio";
-import LogoutForm from "./pages/Auth/LogoutForm";
-import ChangeEmailForm from "./pages/Auth/ChangeEmailForm";
-import ChangePwdForm from "./pages/Auth/ChangePwdForm";
+import LogoutForm from "./features/auth/components/LogoutForm";
+import ChangeEmailForm from "./features/auth/components/ChangeEmailForm";
+import ChangePwdForm from "./features/auth/components/ChangePwdForm";
 
 import { changeEmailAction, changePwdAction, confirmAction, loginAction, logoutAction, registrationAction } from "./archive/actions/authActions";
 import { combinedProfileLoader } from "./pages/Profile/Profile.loader";
@@ -25,6 +25,7 @@ import UserList from "./features/users/UserList";
 import Resume from "./pages/Resume/Resume";
 import ResumeLayout from "./pages/Resume/ResumeLayout";
 import { resumeLoader } from "./archive/resumeLoaders/loaders";
+import Auth from "./pages/Auth/Auth";
 
 const router = createBrowserRouter([
   {
@@ -54,10 +55,10 @@ const router = createBrowserRouter([
         ]
         // loader: combinedProfileLoader
       },
-      { 
-        path: ROUTES.SUBSCRIBES.LIST,
-        element: <UserList />,
-      },
+      // { 
+      //   path: ROUTES.SUBSCRIBES.LIST,
+      //   element: <UserList />,
+      // },
       {
         path: ROUTES.USERS.DETAIL,
         element: <UserDetail />,
@@ -72,18 +73,18 @@ const router = createBrowserRouter([
       { path: "login", element: <Navigate to="/auth/login" /> },
       { 
         path: "auth/login",
-        element: <LoginForm />,
+        element: <Auth />,
         action: loginAction
       },
       { 
-        path: LOCATIONS.AUTH.LOGOUT,
-        element: <LogoutForm />,
+        path: ROUTES.AUTH.LOGOUT,
+        element: <Auth />,
         action: logoutAction
       },
       { path: "registration", element: <Navigate to="/auth/registration" /> },
       { 
-        path: "auth/registration",
-        element: <RegistrationFrom /> ,
+        path: ROUTES.AUTH.REGISTRATION,
+        element: <Auth /> ,
         action: registrationAction
       },
       { 
@@ -109,7 +110,7 @@ const router = createBrowserRouter([
     //   { path: "category/:categoryId", element: <Category /> },
     //   { path: "product/:productId", element: <ProductDetails /> },
     //   { path: "*", element: <NotFound /> },
-      // { path: "*", element: <Navigate to="/" /> },
+      { path: "*", element: <Navigate to="/" /> },
     ],
   },
   // { path: "add-new-post", element: <PostEditor/> },

@@ -106,7 +106,7 @@ function RegistrationFrom() {
 
     return (
         // <div className="flex flex-col gap-5 m-12 items-center max-w-70">
-        <div className="flex flex-col items-center gap-3 justify-center w-[800px]">
+        <div className="flex flex-col items-center gap-3 justify-center">
             <Form 
                 className="flex flex-col gap-3 w-75"
                 method="POST" 
