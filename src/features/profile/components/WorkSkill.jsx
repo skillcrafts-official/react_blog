@@ -38,8 +38,8 @@ function WorkSkill() {
         }
 
         return userSkills.map(skill => (
-            <li className="w-25">
-                <ul className='flex flex-row w-25' >
+            <li className="">
+                <ul className='flex flex-row' >
                     <li key={`deleteSkill${skill.id}`}
                         className={`${styles.checkbox} ${styles[checkboxStyle['active']]}`}
                         onClick={() => deleteUserSkill(skill.id)}>
@@ -60,7 +60,7 @@ function WorkSkill() {
     }
 
     return (
-        <div className="flex flex-col w-full h-fit">
+        <div className="flex flex-col w-fil h-fit">
             <ul className={`flex flex-row flex-wrap ${styles.li}`}>
                 {renderUserSkills()}
                 <li key='addNewSkill'

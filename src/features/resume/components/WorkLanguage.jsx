@@ -81,7 +81,7 @@ function WorkLanguage() {
     };
 
     return (
-        <div className="flex flex-col w-100 h-100">
+        <div className="flex flex-col w-fit h-fit">
             <ul className={`flex flex-row flex-wrap ${styles.li}`}>
                 {renderLanguages()}
                 <li key='addNewLang'

@@ -85,7 +85,7 @@ function WorkExperience({ exp, children }) {
             key={exp.id} 
             onSubmit={handleSubmit}
             encType="multipart/form-data"
-            className="flex flex-col w-full h-fit gap-3 items-center justify-center p-3 border-1 rounded-[12px] border-[#828282ff]">
+            className="flex flex-col w-fit h-fit gap-3 items-center justify-center p-3 border-1 rounded-[12px] border-[#828282ff]">
             <ul className={`${styles.li} flex w-full flex-col`}>
                 <li onClick={() => setIsEdit(!isEdit)}>
                     <ul className={`${styles.li} flex flex-row justify-between`}>
