@@ -140,7 +140,7 @@ function Home() {
               linkTo="/post/1"
               ></NormalPost> */}
         </main>
-        <footer className="flex flex-col my-5 py-5 gap-2 justify-center items-center max-w-150">
+        <footer className="flex flex-col my-5 py-5 gap-2 justify-center items-center">
             {/* <PageNav></PageNav> */}
             <Link to={"/privacy"}>
               <Span variant='primary'>Политика конфиденциальности</Span>

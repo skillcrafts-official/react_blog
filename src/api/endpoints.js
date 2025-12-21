@@ -5,7 +5,7 @@ export const API_ENDPOINTS = {
     REGISTER: '/users/',
     EMAIL: '/users/email/',
     PASSWORD: '/users/password/',
-    CONFIRM: (userId) => `/users/${userId}/confirm/`,
+    CONFIRM: `/emails/confirm/`,
     REFRESH: '/auth/token/refresh/',
     LOGOUT: '/auth/logout/',
     PROFILE: '/auth/profile/',

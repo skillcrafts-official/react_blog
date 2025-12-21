@@ -15,16 +15,6 @@ function RegistrationPermanentUser() {
     const navigate = useNavigate();
     // const { handleSubmit } = useRegistrationPermanentUser();
 
-    useEffect(() => {
-        if (actionData?.success) {
-            console.log(actionData)
-            localStorage.setItem('auth:userId', actionData.user.pk);
-            localStorage.setItem('user:isConfirmed', actionData.user.is_comfirmed);
-            console.log(localStorage)
-            navigate(actionData.redirect);
-        }
-    }, [actionData, navigate]);
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
@@ -34,6 +24,17 @@ function RegistrationPermanentUser() {
     const [isConfirmedPolicy, setIsConfirmedPolicy] = useState(false);
     const [isConfirmedConsent, setIsConfirmedConsent] = useState(false);
 
+    useEffect(() => {
+        if (actionData?.success) {
+            console.log(actionData)
+            localStorage.setItem('auth:userId', actionData.user.pk);
+            localStorage.setItem('auth:email', email);
+            localStorage.setItem('user:isConfirmed', actionData.user.is_comfirmed);
+            console.log(localStorage)
+            navigate(actionData.redirect);
+        }
+    }, [actionData, navigate]);
+    
     function validatePassword( pwd ) {
         const newValidation = {};
         PASSWORD_REQUIREMENTS.forEach(( req ) => {

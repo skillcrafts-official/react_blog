@@ -15,7 +15,7 @@ import LogoutForm from "./features/auth/components/LogoutForm";
 import ChangeEmailForm from "./features/auth/components/ChangeEmailForm";
 import ChangePwdForm from "./features/auth/components/ChangePwdForm";
 
-import { changeEmailAction, changePwdAction, confirmAction, logoutAction } from "./archive/actions/authActions";
+import { changeEmailAction, changePwdAction, logoutAction } from "./archive/actions/authActions";
 import { combinedProfileLoader } from "./pages/Profile/Profile.loader";
 import PostEditor from "./pages/Post/PostEditor";
 import PostDetail from "./pages/Post/PostDetail"
@@ -30,6 +30,7 @@ import UserList from "./pages/User/UserList";
 import Privacy from "./pages/Policies/Privacy";
 import { permanentUserRegAction } from "./features/auth/components/Registration/RegistrationUser.action";
 import Feedback from "./pages/Feedback/Feedback";
+import { confirmAction } from "./features/auth/components/ConfirmEmail.action";
 
 const router = createBrowserRouter([
   {
@@ -100,7 +101,7 @@ const router = createBrowserRouter([
       },
       { 
         path: "auth/confirm-email",
-        element: <ConfirmEmail />,
+        element: <Auth />,
         action: confirmAction
       },
       { 
