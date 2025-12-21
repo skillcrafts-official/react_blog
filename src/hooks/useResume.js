@@ -2,6 +2,77 @@
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { API_BASE_URL, API_DATA, API_ENDPOINTS } from "../constants";
 
+export const useWorkSummary = (profile) => {
+    const [workSummary, setWorkSummary] = useState({});
+    const [selectedUserId, setSelectedUserId] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const fetchWorkSummary = useCallback(async () => {
+        if (!profile) {
+            return;
+        }
+
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            const response = await fetch(
+                `${API_BASE_URL}${API_ENDPOINTS.RESUME.DETAIL(profile)}`,
+                API_DATA("GET")
+            )
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch!');
+            }
+
+            const data = await response.json();
+            setWorkSummary(data);
+            return data;
+        } catch (error) {
+            console.log('Failed to fetch with error:', error.message);
+            setError(error.message);
+            return error;
+        } finally {
+            setIsLoading(false);
+        }
+    }, [profile]);
+
+    const updateSelectedUserId = useCallback((update) => {
+        setSelectedUserId(update);
+    }, []);
+
+    useEffect(() => {
+        if (profile) {
+            fetchWorkSummary();
+        }
+    }, [profile, updateSelectedUserId, fetchWorkSummary]);
+
+    const value = useMemo(() => ({
+        /**
+         * Data
+         */
+        workSummary,
+        selectedUserId,
+        isLoading,
+        error,
+        /**
+         * Methods
+         */
+        fetchWorkSummary,
+        updateSelectedUserId,
+    }),[
+        workSummary,
+        selectedUserId,
+        isLoading,
+        error,
+        fetchWorkSummary,
+        updateSelectedUserId,
+    ]);
+
+    return value;
+}
+
 export const useWorkExperience = (initialData = {}) => {
     const [state, setState] = useState({
         id: null,
@@ -14,6 +85,12 @@ export const useWorkExperience = (initialData = {}) => {
         is_current: null,
         ...initialData
     });
+    // const [isLoading, setIsLoading] = useState(false);
+    // const [error, setError] = useState(null);
+
+    // const fetchWorkExperiences = useCallback(async () = {
+    //     set
+    // }, [])
 
     const update = useCallback((updates) => {
         setState(prev => ({...prev, ...updates}))

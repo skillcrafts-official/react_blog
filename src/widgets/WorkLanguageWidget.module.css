@@ -1,0 +1,40 @@
+.li {
+  /*className='cursor-pointer bg-[#d2d2d2ff] text-[#181818ff] text-[12px] leading-[100%] font-normal'*/
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #d2d2d2ff;
+  max-height: 500px; /* или auto, но тогда transition не сработает */
+  /* opacity: 1; */
+  transform: scaleY(1);
+  transform-origin: top;
+  transition: all 0.5s ease-in-out;
+  /* overflow: hidden; */
+}
+
+.checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 0 5px;
+    border: 2px solid;
+}
+
+.checkbox.active {
+    color: #d2d2d2ff;
+    /* border-color: #107effff; */
+}
+
+
+.checkbox.notActive {
+    color: #ffffff37;
+}

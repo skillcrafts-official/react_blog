@@ -255,7 +255,6 @@ function UserProfile() {
                     {isSubmitting ? 'Сохранение...' : 'Сохранить'}
                 </ActionButton>
             </section>
-            
         </form>
     )
 }

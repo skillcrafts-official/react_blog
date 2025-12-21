@@ -5,7 +5,9 @@ function Span({ children, variant = "primary", ...props }) {
         primary: "text-[#d2d2d2ff] text-[12px] leading-[100%] font-normal",
         invert: "bg-[#d2d2d2ff] text-[#181818ff] p-1 text-[12px] leading-[100%] font-normal",
         secondary: "text-[#828282ff] text-[11px] leading-[120%] font-normal",
-        link: "cursor-pointer text-[#107effff] text-[14px] leading-[100%] font-normal"
+        link: "cursor-pointer text-[#107effff] text-[14px] leading-[100%] font-normal",
+        "secondary-large": "text-[#828282ff] text-[12px] leading-[120%] font-normal",
+        tracking: "text-[#828282ff] text-[12px] leading-[112%] font-normal text-[12px] tracking-wider text-center",
     }
 
     return (

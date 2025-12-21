@@ -10,6 +10,7 @@ function Input({
         privacyValue='',
         requirements = [], 
         state = {},
+        getFloppy = true,
         isRow = false,
         isProtected = false,
         isManuallySaved = false,
@@ -50,14 +51,10 @@ function Input({
                         onChange={handleInput}
                         value={value}
                         { ...props } />
-                    <div className={`${styles.floppy} ${isManuallySaved ? '' : styles.adaptive}`}
+                    {getFloppy && <div className={`${styles.floppy} ${(isManuallySaved) ? '' : styles.adaptive}`}
                         onClick={handleSave}>
                         <FloppyDisk />
-                    </div>
-                    {/* <div className={`${styles.floppy} ${isSearched ? '' : styles.adaptive}`}
-                        onClick={handleSearch}>
-                        <FloppyDisk />
-                    </div> */}
+                    </div>}
                 </div>
             </div>
             {requirements && requirements?.length ? (<ul>

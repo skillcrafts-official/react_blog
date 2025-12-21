@@ -5,8 +5,10 @@ const GlobalContext = createContext();
 function GlobalProvider({ children }) {
     const isLogin = localStorage.getItem("auth:accessToken") ? "login" : "logout"
     const [userId, setUserId] = useState("");
+    const [guestId, setGuestId] = useState("");
     const [selectedPost, setSelectedPost] = useState({});
     const [accessToken, setAccessToken] = useState("");
+    const [guestToken, setGuestToken] = useState("");
     const [logStatus, setLogStatus] = useState(isLogin);
     const [updatedProfile, setUpdatedProfile] = useState(0);
     const [profileStatus, setProfileStatus] = useState('old');
@@ -17,13 +19,19 @@ function GlobalProvider({ children }) {
 
     useEffect(() => {
       const storedUser = localStorage.getItem('auth:userId');
-      const storedToken = localStorage.getItem('auth:accessToken');
+      const storedGuestUser = localStorage.getItem('auth:guestId');
+      const storedAccessToken = localStorage.getItem('auth:accessToken');
+      const storedGuestToken = localStorage.getItem('auth:guestToken');
         
-      if (storedUser && storedToken) {
+      if (storedUser && storedAccessToken) {
         setUserId(storedUser);
-        setAccessToken(storedToken)
+        setAccessToken(storedAccessToken)
         setLogStatus('login');
         // setShowUserber(true); 
+      } else if (storedGuestUser && storedGuestToken) {
+        setGuestId(storedGuestUser);
+        setGuestToken(storedGuestToken)
+        setLogStatus('login');
       }
     }, []);
 
@@ -51,7 +59,8 @@ function GlobalProvider({ children }) {
                 currentLocation, setCurrentLocation,
                 isOpenSidebarModalView, handleSidebarModalView,
                 handleAccess, handleLogStatus, handleUserId, setUpdatedProfile,
-                setProfileStatus, setSelectedPost
+                setProfileStatus, setSelectedPost,
+                guestId, guestToken
             }}>
             {children}
         </GlobalContext.Provider>

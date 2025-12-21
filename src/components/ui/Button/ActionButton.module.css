@@ -1,4 +1,7 @@
 .button {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
     font-family: 'Roboto', sans-serif;
     font-size: 12px;
     font-weight: 400;
@@ -16,7 +19,10 @@
 }
 
 .primary:hover {
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
+    filter: brightness(1.10);
+    /* filter: sepia(0.5); */
+    /* filter: opacity(0.80); */
 }
 
 .primary:active {

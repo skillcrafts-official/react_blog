@@ -1,16 +1,29 @@
 .title {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
-    font-size: 21px;
-    line-height: 21px;
-    margin: 30px 0px;
+    /* font-size: 21px;
+    line-height: 21px; */
+    /* margin: 30px 0px; */
     color: #ffffffff;
 }
 
 .primary {
+    font-size: 24px;
+    line-height: 24px;
+    margin: 30px 0px;
+    text-align: center;
+}
+
+.secondary {
     font-size: 21px;
     line-height: 21px;
-    margin: 30px 0px;
+    margin: 25px 0px;
+}
+
+.tertiary {
+    font-size: 18px;
+    line-height: 18px;
+    margin-bottom: 20px;
 }
 
 .center {

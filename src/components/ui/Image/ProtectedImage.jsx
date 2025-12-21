@@ -23,7 +23,7 @@ function ProtectedImage({ src, alt, className, fallback }) {
                     return;
                 }
 
-                const token = localStorage.getItem('auth:accessToken');
+                const token = localStorage.getItem('auth:accessToken') || localStorage.getItem('auth:guestToken');
                 const response = await fetch(
                     src,
                     {

@@ -1,14 +1,19 @@
 import { Link, Form, useActionData, useNavigate } from "react-router-dom"
 import { EMAIL_REQUIREMENTS, PASSWORD_REQUIREMENTS, PASSWORD_MATCHED } from "@/constants";
+
 import ActionButton from "@/components/ui/Button/ActionButton";
 import Input from "@/components/ui/Input/Input";
-import Title from "@/components/ui/Label/Title";
+
 import { useEffect, useState } from "react";
 import { CHAR_REPLACER } from "@/components/utils";
+import Span from "@/components/ui/Label/Span";
+import Checkbox from "@/components/ui/Input/Checkbox";
+// import { useRegistrationPermanentUser } from "@/hooks/useAuthenticate";
 
-function RegistrationFrom() {
+function RegistrationPermanentUser() {
     const actionData = useActionData();
     const navigate = useNavigate();
+    // const { handleSubmit } = useRegistrationPermanentUser();
 
     useEffect(() => {
         if (actionData?.success) {
@@ -26,6 +31,8 @@ function RegistrationFrom() {
     const [pwdValidation, setPwdValidation] = useState({ base: false });
     const [pwdMatched, setPwdMatched] = useState({ isMatched: false });
     const [emailValidation, setEmailValidation] = useState({ emailFormat: false });
+    const [isConfirmedPolicy, setIsConfirmedPolicy] = useState(false);
+    const [isConfirmedConsent, setIsConfirmedConsent] = useState(false);
 
     function validatePassword( pwd ) {
         const newValidation = {};
@@ -100,23 +107,48 @@ function RegistrationFrom() {
         validatePasswordMatched(password, newPwd);
     };
 
+    const handleChangeConfirmedPolicy = (event) => {
+        setIsConfirmedPolicy(event.target.checked);
+    }
+
+    const handleChangeConfirmedConsent = (event) => {
+        setIsConfirmedConsent(event.target.checked);
+    }
+
+    const renderConfirmedPolicy = () => {
+        return <Span variant="secondary">принимаете <a href="/privacy" target="_blank">
+            <Span variant='link' className='text-[#107effff] text-[12px] underline'>Политику конфиденциальности</Span></a>
+        </Span>
+    }
+
+    const renderConfirmedConsent = () => {
+        return <Span variant="secondary">
+            даёте согласие на обработку персональных данных
+        </Span>
+    }
+
     const isEmailValid = Object.values(emailValidation).every((value) => value);
     const isPasswordValid = Object.values(pwdValidation).every((value) => value);
     const isPasswordMatched = Object.values(pwdMatched).every((value) => value);
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        console.log(event)
+        const formData = new FormData(event.target);
+
+        const submitData = new FormData();
+    }
 
     return (
         // <div className="flex flex-col gap-5 m-12 items-center max-w-70">
         <div className="flex flex-col items-center gap-3 justify-center">
             <Form 
-                className="flex flex-col gap-3 w-75"
-                method="POST" 
-                action="/auth/registration"
-                >
-                <Title>Регистрация</Title>
-                <div className="section">
-                    <Link to={'/recovery/'} className="font-roboto text-white text-[12px] leading-[100%] font-normal">восстановление</Link>
-                    <Link to={'/login/'} className="font-roboto text-white text-[12px] leading-[100%] font-normal">вход</Link>
-                </div>
+                className="flex flex-col gap-3 w-80 items-center"
+                // onSubmit={handleSubmit}
+                // encType="multipart/form-data">
+                action={"/auth/registration"}
+                method="POST">
                 <Input 
                     type="email"
                     name="email"
@@ -128,7 +160,7 @@ function RegistrationFrom() {
                     state={emailValidation}
                     onChange={handleEmailChange}
                     variant={email ? isEmailValid === true ? 'valid': 'invalid' : 'primary'}
-                />
+                    getFloppy={false}/>
                 <Input 
                     type="password"
                     name="password"
@@ -140,7 +172,7 @@ function RegistrationFrom() {
                     onChange={handlePwdChange}
                     variant={password ? isPasswordValid === true ? 'valid': 'invalid' : 'primary'}
                     value={password}
-                />
+                    getFloppy={false}/>
                 <Input 
                     type="password"
                     name="password2"
@@ -152,11 +184,31 @@ function RegistrationFrom() {
                     onChange={handlePwd2Change}
                     variant={password2 ? isPasswordMatched ? 'valid': 'invalid' : 'primary'}
                     value={password2}
-                />
+                    getFloppy={false}/>
+                <div className="flex flex-col gap-1 my-2">
+                    <Span variant="secondary-large">Нажимая кнопку <strong>Зарегистрироваться</strong>,
+                        вы:
+                    </Span>
+                    <Checkbox 
+                        type="checkbox"
+                        name="policy"
+                        required
+                        onChange={(event) => handleChangeConfirmedPolicy(event)}>
+                        {renderConfirmedPolicy()}
+                    </Checkbox>
+                    <Checkbox 
+                        type="checkbox"
+                        name="consent"
+                        required
+                        onChange={(event) => handleChangeConfirmedConsent(event)}>
+                        {renderConfirmedConsent()}
+                    </Checkbox>
+                </div>
                 <ActionButton
                     type="submit"
-                    disabled={!(isEmailValid && isPasswordValid && isPasswordMatched)}
-                    variant={(isEmailValid && isPasswordValid && isPasswordMatched) ? 'primary' : 'disabled'}
+                    aria-label="Зарегистрироваться"
+                    disabled={!(isConfirmedPolicy && isConfirmedConsent && isEmailValid && isPasswordValid && isPasswordMatched)}
+                    variant={(isConfirmedPolicy && isConfirmedConsent && isEmailValid && isPasswordValid && isPasswordMatched) ? 'primary' : 'disabled'}
                     >
                     Зарегистрироваться
                 </ActionButton>
@@ -166,4 +218,4 @@ function RegistrationFrom() {
     );
 }
 
-export default RegistrationFrom
+export default RegistrationPermanentUser;

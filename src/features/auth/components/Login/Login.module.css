@@ -1,0 +1,5 @@
+.from {
+  transform: scaleY(1);
+  transform-origin: top;
+  transition: all 0.5s ease-in-out;
+}

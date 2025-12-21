@@ -5,7 +5,7 @@ import Header from '@/features/sidebar/Header';
 import Sidebar from "@/features/sidebar/Sidebar";
 import { useGlobalState } from "@/lib/providers/GlobalProvider";
 import { useEffect, useMemo, useState } from "react";
-import UserList from '@/features/users/UserList';
+import UserList from '@/pages/User/UserList';
 import Span from './ui/Label/Span';
 
 function Layout() {
@@ -27,7 +27,7 @@ function Layout() {
             <header className='sticky'>
                 <Header/>
             </header>
-            <Sidebar />
+            {/\/users/.test(location.pathname) && <Sidebar />}
             {/\/users\/[\d]+/.test(location.pathname) && <UserList/>}
             <main className="main mb-7">
               <Outlet className="w-full"/>

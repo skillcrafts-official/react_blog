@@ -4,9 +4,9 @@ import { LOCATIONS, ROUTES } from "./constants";
 import Layout from "./components/Layout";
 import Home from "./pages/Home/Home";
 // import PostDetail from "./pages/Post/PostDetail";
-import LoginForm from "./features/auth/components/LoginForm";
-import RegistrationFrom from "./features/auth/components/RegistrationForm";
-import ConfirmEmailForm from "./features/auth/components/ConfirmEmailForm";
+import LoginForm from "./features/auth/components/Login/Login";
+import RegistrationFrom from "./features/auth/components/Registration/RegistrationPermanentUser";
+import ConfirmEmail from "./features/auth/components/ConfirmEmail";
 import RecoveryForm from "./features/auth/components/RecoveryForm";
 import Profile from "./pages/Profile/Profile";
 import SearchResult from "./archive/SearchResult";
@@ -15,17 +15,21 @@ import LogoutForm from "./features/auth/components/LogoutForm";
 import ChangeEmailForm from "./features/auth/components/ChangeEmailForm";
 import ChangePwdForm from "./features/auth/components/ChangePwdForm";
 
-import { changeEmailAction, changePwdAction, confirmAction, loginAction, logoutAction, registrationAction } from "./archive/actions/authActions";
+import { changeEmailAction, changePwdAction, confirmAction, logoutAction } from "./archive/actions/authActions";
 import { combinedProfileLoader } from "./pages/Profile/Profile.loader";
 import PostEditor from "./pages/Post/PostEditor";
 import PostDetail from "./pages/Post/PostDetail"
 import { allPostsLoader, postLoader } from "./pages/Post/PostDetail.loader";
 import UserDetail from "./pages/User/UserDetail";
-import UserList from "./features/users/UserList";
 import Resume from "./pages/Resume/Resume";
 import ResumeLayout from "./pages/Resume/ResumeLayout";
 import { resumeLoader } from "./archive/resumeLoaders/loaders";
 import Auth from "./pages/Auth/Auth";
+import { loginAction } from "./features/auth/components/Login/Login.action";
+import UserList from "./pages/User/UserList";
+import Privacy from "./pages/Policies/Privacy";
+import { permanentUserRegAction } from "./features/auth/components/Registration/RegistrationUser.action";
+import Feedback from "./pages/Feedback/Feedback";
 
 const router = createBrowserRouter([
   {
@@ -35,13 +39,14 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-        loader: allPostsLoader
+        // loader: allPostsLoader
       },
       { 
         path: ROUTES.PROFILES.EDITOR,
         element: <Profile />,
         loader: combinedProfileLoader
       },
+      { path: 'feedback', element: <Feedback />},
       { 
         path: 'resume',
         element: <ResumeLayout />,
@@ -55,10 +60,11 @@ const router = createBrowserRouter([
         ]
         // loader: combinedProfileLoader
       },
-      // { 
-      //   path: ROUTES.SUBSCRIBES.LIST,
-      //   element: <UserList />,
-      // },
+      { 
+        path: ROUTES.USERS.LIST,
+        element: <UserList />,
+        // loader: useUserList
+      },
       {
         path: ROUTES.USERS.DETAIL,
         element: <UserDetail />,
@@ -72,10 +78,15 @@ const router = createBrowserRouter([
       { path: ROUTES.POSTS.EDITOR, element: <PostEditor/> },
       { path: "login", element: <Navigate to="/auth/login" /> },
       { 
-        path: "auth/login",
+        path: "/auth/login",
         element: <Auth />,
         action: loginAction
       },
+      // { 
+      //   path: "/auth/login?guest=true",
+      //   element: <Auth />,
+      //   action: guestLoginAction
+      // },
       { 
         path: ROUTES.AUTH.LOGOUT,
         element: <Auth />,
@@ -84,12 +95,12 @@ const router = createBrowserRouter([
       { path: "registration", element: <Navigate to="/auth/registration" /> },
       { 
         path: ROUTES.AUTH.REGISTRATION,
-        element: <Auth /> ,
-        action: registrationAction
+        element: <Auth />,
+        action: permanentUserRegAction
       },
       { 
         path: "auth/confirm-email",
-        element: <ConfirmEmailForm />,
+        element: <ConfirmEmail />,
         action: confirmAction
       },
       { 
@@ -111,6 +122,7 @@ const router = createBrowserRouter([
     //   { path: "product/:productId", element: <ProductDetails /> },
     //   { path: "*", element: <NotFound /> },
       { path: "*", element: <Navigate to="/" /> },
+      { path: 'privacy/', element: <Privacy />}
     ],
   },
   // { path: "add-new-post", element: <PostEditor/> },

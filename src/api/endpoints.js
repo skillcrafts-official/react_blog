@@ -1,6 +1,7 @@
 export const API_ENDPOINTS = {
   AUTH: {
     LOGIN: '/auth/token/',
+    GUEST_LOGIN: '/auth/guest-token/',
     REGISTER: '/users/',
     EMAIL: '/users/email/',
     PASSWORD: '/users/password/',
@@ -24,6 +25,7 @@ export const API_ENDPOINTS = {
     EDITOR: '/post-editor/'
   },
   PROFILES: {
+    LIST: `/profiles/`,
     CRUD: (profileId) => `/profiles/${profileId}/`,
     DISPLAYS: {
       EDUCATION_LEVELS: `/profiles/displays/education-levels/`

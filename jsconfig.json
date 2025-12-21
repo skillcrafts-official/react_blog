@@ -13,6 +13,7 @@
           "@components/*": ["src/components/*"],
           "@pages/*": ["./src/pages/*"],
           "@utils/*": ["./src/utils/*"],
+          "@views/*": ["./src/views/*"],
           "@hooks/*": ["./src/hooks/*"],
           "@assets/*": ["./src/assets/*"],
           "@api/*": ["./src/api/*"],

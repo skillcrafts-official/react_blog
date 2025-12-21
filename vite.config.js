@@ -29,6 +29,7 @@ export default defineConfig({
       // Feature-based алиасы (если используете)
       '@features': path.resolve(__dirname, './src/features'),
       '@lib': path.resolve(__dirname, './src/lib'),
+      '@views': path.resolve(__dirname, './src/views'),
       // '@services': path.resolve(__dirname, './src/services'),
 
       // Для публичной папки

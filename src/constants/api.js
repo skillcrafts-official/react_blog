@@ -7,7 +7,7 @@ export function API_DATA(method, bodyData = null, payload = {}, options = {}) {
     ...options.headers,
   };
   console.log(headers)
-  const token = localStorage.getItem('auth:accessToken');
+  const token = localStorage.getItem('auth:accessToken') || localStorage.getItem('auth:guestToken');
   console.log(`token ${token}`)
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
@@ -164,6 +164,7 @@ export const ROUTES = {
     LOGIN: `/auth/login`,
     LOGOUT: `/auth/logout`,
     REGISTRATION: `/auth/registration`,
+    CONFIRMATION: `/auth/confirm-email`,
   },
   HOME: '/',
   LOGIN: '/login',

@@ -3,19 +3,21 @@ import styles from './Auth.module.css';
 import { useLocation } from "react-router-dom";
 
 import { ROUTES } from "@/constants";
-import LoginForm from "@/features/auth/components/LoginForm";
 import LogoutForm from "@/features/auth/components/LogoutForm"
-import RegistrationFrom from "@/features/auth/components/RegistrationForm";
+import RegistrationUser from '@/features/auth/components/Registration/RegistrationUser';
+import Login from '@/features/auth/components/Login/Login';
+import ConfirmEmail from '@/features/auth/components/ConfirmEmail';
 
 function Auth() {
     const location = useLocation();
     const { pathname } = location;
 
     return (
-        <div className={styles.auth}>
-            {pathname === ROUTES.AUTH.LOGIN && <LoginForm/>}
+        <div className={styles.auth}>        
+            {pathname === ROUTES.AUTH.LOGIN && <Login/>}
             {pathname === ROUTES.AUTH.LOGOUT && <LogoutForm/>}
-            {pathname === ROUTES.AUTH.REGISTRATION && <RegistrationFrom/>}
+            {pathname === ROUTES.AUTH.REGISTRATION && <RegistrationUser/>}
+            {pathname === ROUTES.AUTH.CONFIRMATION && <ConfirmEmail/>}
         </div>
     )
 }

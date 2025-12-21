@@ -42,10 +42,7 @@ function Resume() {
             
             <div className={styles.resume}>
                 <section className={styles.first}>
-                    <section className={styles.first}>
-                        <Span variant="invert">Владение родными и инстранными языками</Span>
-                        <WorkLanguage />
-                    </section>
+                    
                     <Span variant="invert">Ваш опыт сотрудничества</Span>
                     {workExperiences.map((exp) => (
                         <div className="flex flex-col w-full h-fit gap-3 items-center justify-center p-3 border-1 rounded-[12px] border-[#828282ff]">
@@ -63,7 +60,12 @@ function Resume() {
                     
                     
                 </section>
+                <section className={styles.second}>
+                    <Span variant="invert">Владение родными и инстранными языками</Span>
+                    <WorkLanguage />
+                </section>
                 <section className={styles.third}>
+                    
                     <section className={styles.first}>
                         <Span variant="invert">Владение инструментами и технологиями</Span>
                         <WorkSkill />

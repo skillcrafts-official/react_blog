@@ -53,7 +53,7 @@ function RecoveryForm() {
                     state={emailValidation}
                     onChange={handleEmailChange}
                     variant={email ? isEmailValid === true ? 'valid': 'invalid' : 'primary'}
-                />
+                    getFloppy={false}/>
                 <Link to="/">
                     <ActionButton
                         disabled={!(isEmailValid)}
