@@ -189,6 +189,12 @@ export const ROUTES = {
   RESUME: {
     DETAIL: (profileId) => `/resume/?profile=${profileId}`,
   },
+  WORKFLOWS: {
+    USER: {
+      LIST: `workflows`,
+      CREATE_TASK: `workflows/create-task`
+    }
+  }
 };
 
 export const STORAGE_KEYS = {

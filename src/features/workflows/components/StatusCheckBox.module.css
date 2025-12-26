@@ -1,0 +1,85 @@
+.button {
+  position: relative;
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ffffff37;
+  /* padding-left: 35px; */
+  cursor: pointer;
+}
+
+.value {
+  position: relative;
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ffffff37;
+  /* padding-left: 35px; */
+}
+
+.low {
+  color: green;
+}
+
+.middle {
+  color: yellow;
+}
+
+.high {
+  color: orange;
+}
+
+.critical {
+  color: red;
+}
+
+.button:hover {
+  color:#107effff;
+}
+
+/* .customCheckbox + label {
+  position: relative;
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ffffff37;
+  cursor: pointer;
+}
+
+.customCheckbox + label:hover {
+  color:#107effff;
+} */
+
+.li {
+  /*className='cursor-pointer bg-[#d2d2d2ff] text-[#181818ff] text-[12px] leading-[100%] font-normal'*/
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #d2d2d2ff;
+  max-height: 500px; /* или auto, но тогда transition не сработает */
+  /* opacity: 1; */
+  transform: scaleY(1);
+  transform-origin: top;
+  transition: all 0.5s ease-in-out;
+  /* overflow: hidden; */
+}
+
+.checkbox {
+    display: inline;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 0 5px;
+    border: 2px solid;
+}
+
+.checkbox.active {
+    color: #d2d2d2ff;
+    /* border-color: #107effff; */
+}
+
+
+.checkbox.notActive {
+    color: #ffffff37;
+}

@@ -4,6 +4,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 0.5em;
     width: 800px;
     /* height: 225px; */
     /* border-radius: 0 12px; */
@@ -19,3 +20,16 @@
 }
 
 /* flex flex-row justify-between w-dvw items-center p-4 bg-[#0d0d0dff] shadow-header rounded-b-[12px] */
+.avatar {
+    display: grid;
+    /* align-self: end; */
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    height: 4em;
+    border-radius: 50%;
+    border: 3px solid var(--valid-color);
+    @media (min-width: 600px) {
+        height: 2em;
+        border: 2px solid var(--valid-color);
+    }
+}

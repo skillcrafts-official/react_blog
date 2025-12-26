@@ -6,6 +6,8 @@
     font-weight: 400;
     padding: 0 5px;
     border: 2px solid;
+    text-wrap: nowrap;
+    transition: all 0.3s ease-in-out;
 }
 
 .checkbox.active {
@@ -13,7 +15,15 @@
     /* border-color: #107effff; */
 }
 
+.checkbox.active:hover {
+    color: #d2d2d2aa;
+    /* border-color: #107effff; */
+}
 
 .checkbox.notActive {
     color: #ffffff37;
+}
+
+.checkbox:hover {
+    color: #d2d2d2ff;
 }

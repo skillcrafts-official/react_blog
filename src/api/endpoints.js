@@ -77,4 +77,18 @@ export const API_ENDPOINTS = {
       CREATE: `/resume/skills/`
     }
   },
+  WORKFLOWS: {
+    TASKS: {
+      LIST: (status) => `/workflows/tasks/?status=${status}`,
+      CREATE: `/workflows/tasks/`,
+      GET_OR_PATCH_OR_DELETE: (task) => `/workflows/tasks/${task}/`
+    },
+    CRITERIAS: {
+      GET_OR_POST: (task) => `/workflows/tasks/${task}/acceptance-criterias/`,
+      PATCH_OR_DELETE: (task, criteria) => `/workflows/tasks/${task}/acceptance-criterias/${criteria}/`
+    },
+    TIME_ENTRIES: {
+      GET_OR_POST: (task) => `/workflows/tasks/${task}/hours-spents/`
+    }
+  }
 };

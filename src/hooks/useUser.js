@@ -60,19 +60,22 @@ export const useUserList = () => {
     return value
 }
 
-export const useUserView = () => {
+export const useUserView = (userId = null) => {
     const [userView, setUserView] = useState({});
     const [seletedUser, setSelectedUser] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const fetchUserProfiles = useCallback(async () => {
+    const fetchUserProfiles = useCallback(async (profile) => {
+        if (!userId && !seletedUser) {
+            return ;
+        }
         setIsLoading(true);
         setError(null);
-
+        console.log('Fetching...')
         try {
             const response = await fetch(
-                `${API_BASE_URL}${API_ENDPOINTS.PROFILES.CRUD(seletedUser)}`,
+                `${API_BASE_URL}${API_ENDPOINTS.PROFILES.CRUD(profile)}`,
                 API_DATA("GET")
             )
 
@@ -89,11 +92,17 @@ export const useUserView = () => {
         } finally {
             setIsLoading(false);
         }
-    }, [seletedUser])
+    }, [userId, seletedUser])
 
     const updateSelectedUser = useCallback((update) => {
         setSelectedUser(update);
     }, [])
+
+    useEffect(() => {
+        if (userId) {
+            fetchUserProfiles(userId);
+        }
+    }, [userId, fetchUserProfiles])
 
     useEffect(() => {
         if (seletedUser) {

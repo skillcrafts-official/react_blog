@@ -1,0 +1,26 @@
+.customCheckbox {
+  position: relative;
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ffffff37;
+  /* padding-left: 35px; */
+  cursor: pointer;
+}
+
+.customCheckbox:hover {
+  color:#107effff;
+}
+
+/* .customCheckbox + label {
+  position: relative;
+  font-family: 'Lato', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ffffff37;
+  cursor: pointer;
+}
+
+.customCheckbox + label:hover {
+  color:#107effff;
+} */

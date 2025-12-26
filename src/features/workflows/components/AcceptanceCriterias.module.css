@@ -1,0 +1,36 @@
+.primary {
+  /*className='cursor-pointer bg-[#d2d2d2ff] text-[#181818ff] text-[12px] leading-[100%] font-normal'*/
+  cursor: pointer;
+  display: inline;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #d2d2d2ff;
+  width: fit-content;
+  transition: all 0.3s ease-in-out;
+}
+
+.primary:hover {
+  /* text-decoration: line-through; */
+  font-weight: 900;
+}
+
+.low {
+  color: #d2d2d233;
+}
+
+.low:hover {
+  color: #107effff;
+}
+
+.completed {
+  text-decoration: line-through;
+  font-weight: 900;
+  color: #d2d2d277
+}
+
+.completed:hover {
+  text-decoration: none;
+  font-weight: 900;
+  color: #d2d2d2ff;
+}

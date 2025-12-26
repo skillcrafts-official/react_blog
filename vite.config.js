@@ -40,9 +40,11 @@ export default defineConfig({
     },
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
   },
-  base: '/',
+  // base: '/',
+  base: './',
   build: {
     outDir: 'dist',
+    assetsDir: 'assets',
     rollupOptions: {
       input: {
         main: 'index.html'

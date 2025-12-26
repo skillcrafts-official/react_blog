@@ -31,6 +31,9 @@ import Privacy from "./pages/Policies/Privacy";
 import { permanentUserRegAction } from "./features/auth/components/Registration/RegistrationUser.action";
 import Feedback from "./pages/Feedback/Feedback";
 import { confirmAction } from "./features/auth/components/ConfirmEmail.action";
+import Workflow from "./pages/Workflow/Workflow";
+import TaskEditableView from "./views/TaskEditableView";
+import { createTaskAction } from "./views/TaskEditableView.action";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +49,12 @@ const router = createBrowserRouter([
         path: ROUTES.PROFILES.EDITOR,
         element: <Profile />,
         loader: combinedProfileLoader
+      },
+      { path: ROUTES.WORKFLOWS.USER.LIST, element: <Workflow /> },
+      {
+        path: ROUTES.WORKFLOWS.USER.CREATE_TASK,
+        element: <TaskEditableView />,
+        action: createTaskAction
       },
       { path: 'feedback', element: <Feedback />},
       { 
@@ -122,7 +131,7 @@ const router = createBrowserRouter([
     //   { path: "category/:categoryId", element: <Category /> },
     //   { path: "product/:productId", element: <ProductDetails /> },
     //   { path: "*", element: <NotFound /> },
-      { path: "*", element: <Navigate to="/" /> },
+      // { path: "*", element: <Navigate to="/" /> },
       { path: 'privacy/', element: <Privacy />}
     ],
   },

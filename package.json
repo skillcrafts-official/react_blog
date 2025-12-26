@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/cli": "^8.0.0",
+    "@capacitor/core": "^8.0.0",
     "@floating-ui/dom": "^1.7.4",
     "@tailwindcss/vite": "^4.1.16",
     "@tiptap/extension-image": "^3.11.0",
@@ -22,8 +25,10 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-image-crop": "^11.0.10",
+    "react-markdown": "^10.1.0",
     "react-modal": "^3.16.3",
     "react-router-dom": "^7.9.4",
+    "remark-gfm": "^4.0.1",
     "tailwindcss": "^4.1.16"
   },
   "devDependencies": {

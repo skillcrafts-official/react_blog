@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react';
 import styles from './SimpleCheckBox.module.css'
 
 function SimpleCheckBox({
-        activeStatus = null, currentField, selectedValue = null, checkboxValue, fetchFunc
+        activeStatus = null,
+        currentField,
+        selectedValue = null,
+        checkboxValue,
+        fetchFunc,
+        ...props
 }) {
     const [isActive, setIsActive] = useState(activeStatus);
 
@@ -24,7 +29,8 @@ function SimpleCheckBox({
             key={`checkbox_${currentField}`}
             role='simple-checkbox'
             className={`${styles.checkbox} ${styles[checkboxStyle[isActive]]}`}
-            onClick={() => fetchFunc(currentField)}
+            onClick={() => isActive ? null : fetchFunc(currentField)}
+            { ...props }
             >
                 {checkboxValue}
         </p>

@@ -1,0 +1,91 @@
+.primary {
+
+}
+
+.primary-invert {
+    background-color: #d2d2d2ff;
+    color: #181818ff;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 1px;
+}
+
+.secondary {
+    cursor: pointer;
+    color: #d2d2d2aa;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 2px 5px;
+    transition: all 0.25s ease-in-out;
+    user-select: none;
+}
+
+.secondary:hover {
+    background-color: #d2d2d2aa;
+    color: #181818ff;
+}
+
+.secondary:active {
+    animation-duration: 50ms;
+    transform: scale(0.95);
+}
+
+.secondary-invert {
+    cursor: pointer;
+    background-color: #d2d2d2aa;
+    color: #181818ff;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 2px 5px;
+    transition: all 0.25s ease-in-out;
+    user-select: none;
+}
+
+.secondary-invert:hover {
+    background-color: #d2d2d2ff;
+}
+
+.secondary-invert:active {
+    animation-duration: 50ms;
+    transform: scale(0.95);
+}
+
+.tertiary {
+    cursor: pointer;
+    color: #d2d2d2aa;
+    font-size: 11px;
+    font-weight: 400;
+    padding: 2px 5px;
+    transition: all 0.25s ease-in-out;
+    user-select: none;
+}
+
+.tertiary:hover {
+    background-color: #d2d2d2aa;
+    color: #181818ff;
+}
+
+.tertiary:active {
+    animation-duration: 50ms;
+    transform: scale(0.95);
+}
+
+.tertiary-invert {
+    cursor: pointer;
+    background-color: #d2d2d2aa;
+    color: #181818ff;
+    font-size: 11px;
+    font-weight: 400;
+    padding: 2px 5px;
+    transition: all 0.25s ease-in-out;
+    user-select: none;
+}
+
+.tertiary-invert:hover {
+    background-color: #d2d2d2ff;
+}
+
+.tertiary-invert:active {
+    animation-duration: 50ms;
+    transform: scale(0.95);
+}

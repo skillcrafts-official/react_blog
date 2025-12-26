@@ -1,5 +1,7 @@
-function Span({ children, variant = "primary", ...props }) {
-    const baseStyles = "font-roboto w-fit select-none"
+import styles from './ClickableSpan.module.css';
+
+function ClickableSpan({ children, variant = "primary", ...props }) {
+    const baseStyles = "font-roboto w-fit"
 
     const variants = {
         primary: "text-[#d2d2d2ff] text-[12px] leading-[100%] font-normal",
@@ -13,7 +15,7 @@ function Span({ children, variant = "primary", ...props }) {
 
     return (
         <span
-            className={`${baseStyles} ${variants[variant]}`}
+            className={`${baseStyles} ${styles[variant]}`}
             { ...props }
             >
             {children}
@@ -21,4 +23,4 @@ function Span({ children, variant = "primary", ...props }) {
     )
 }
 
-export default Span
+export default ClickableSpan;

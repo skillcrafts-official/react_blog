@@ -8,27 +8,33 @@ import { useGlobalState } from "../../../lib/providers/GlobalProvider";
 function ScrollCheckBox({ 
         currentValue,
         currentField,
-        checkboxValues,
-        verbose_names = {}
+        // checkboxValues = [],
+        // verbose_names = {},
+        // handleChange = () => null,
+        handleOnPrevClick = () => null,
+        handleOnNextClick = () => null,
     }) {
     const { userId } = useGlobalState();
+    const [value, setValue] = useState(currentValue);
 
-    const [choice, setChoice] = useState(currentValue);
-    const [isLoading, setIsLoading] = useState(false);
-
-    console.log(currentValue);
-
-    
-    
     return (
-        <p 
-            key={`scroll_checkbox_${currentField}`}
-            role='scrolling-checkbox'
-            className={`${styles.checkbox} ${choice === 'nothing' && styles.nothing}`}
-            onClick={() => null}
-            >
-                {verbose_names[choice]}
-        </p>
+        <div className="flex flex-row gap-5">
+            <button type="button"
+                onClick={handleOnPrevClick}>
+                {"<"}
+            </button>
+            <p 
+                key={`permissions_${currentField}`}
+                role='multi-checkbox'
+                className={styles.customCheckbox}
+                >
+                    {currentValue}
+            </p>
+            <button type="button"
+                onClick={handleOnNextClick}>
+                {">"}
+            </button>
+        </div>
     )
 }
 
