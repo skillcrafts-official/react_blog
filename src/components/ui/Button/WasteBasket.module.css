@@ -1,0 +1,29 @@
+.external-outline {
+    cursor: pointer;
+    place-self: center;
+    display: grid;
+    grid-template-rows: 1fr 10fr;
+    grid-template-areas:
+        "cap"
+        "basket";
+    gap: 10%;
+    width: 100%;
+    height: 100%;
+}
+
+.cap {
+    grid-area: cap;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin: 5% 0%; */
+}
+
+.basket {
+    grid-area: basket;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin: 15% 0%; */
+    width: 100%;
+}

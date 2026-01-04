@@ -1,10 +1,11 @@
 .primary {
   /*className='cursor-pointer bg-[#d2d2d2ff] text-[#181818ff] text-[12px] leading-[100%] font-normal'*/
   cursor: pointer;
-  display: inline;
+  /* display: block; */
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 400;
+  line-height: 1.2em;
   color: #d2d2d2ff;
   width: fit-content;
   transition: all 0.3s ease-in-out;

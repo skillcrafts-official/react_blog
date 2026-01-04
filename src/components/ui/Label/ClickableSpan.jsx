@@ -1,7 +1,25 @@
+import { useEffect, useState } from 'react';
 import styles from './ClickableSpan.module.css';
 
-function ClickableSpan({ children, variant = "primary", ...props }) {
+function ClickableSpan({ 
+    children,
+    variant = "primary",
+    currentValue = null,
+    isActive = null,
+    ...props
+}) {
+    const [isSelected, setIsSelected] = useState(false);
     const baseStyles = "font-roboto w-fit"
+
+    useEffect(() => {
+        if (isActive !== null) {
+            setIsSelected(isActive);
+        } else {
+            setIsSelected(children === currentValue)
+        }
+    }, [children, isActive, currentValue])
+
+    console.log(isSelected)
 
     const variants = {
         primary: "text-[#d2d2d2ff] text-[12px] leading-[100%] font-normal",
@@ -15,7 +33,7 @@ function ClickableSpan({ children, variant = "primary", ...props }) {
 
     return (
         <span
-            className={`${baseStyles} ${styles[variant]}`}
+            className={`${baseStyles} ${styles[variant]} ${isSelected ? styles['invert']: ''}`}
             { ...props }
             >
             {children}

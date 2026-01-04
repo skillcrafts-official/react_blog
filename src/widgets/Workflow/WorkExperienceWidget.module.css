@@ -1,0 +1,85 @@
+/* Более изящная анимация */
+/* "flex flex-col w-full h-fit gap-3 items-center justify-center p-3 border-1 rounded-[12px] border-[#828282ff]" */
+.work-experience-widget {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 
+    "copmany"
+    "industryDesc"
+    "workYears"
+    "roles"
+    "expirences";
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ffffff55;
+  border-radius: 12px;
+  /* gap: 20px; */
+  background-color: #202020ff;
+  max-height: 1500px; /* или auto, но тогда transition не сработает */
+  width: 100%;
+  opacity: 1;
+  transform: scaleY(1);
+  transform-origin: top;
+  transition: all 0.5s ease-in-out;
+  /* overflow: hidden; */
+}
+
+.main {
+  display: grid;
+  border-top: 1px solid #ffffff55;
+  border-bottom: 1px solid #ffffff55;
+  border-radius: 12px;
+  background-color: #181818ff;
+  padding: 10px 12px;
+  gap: 12px;
+}
+
+.section {
+  display: grid;
+  gap: 6px;
+}
+
+.ul {
+  /* margin: 1em 0; */
+  /* padding-left: 1em; */
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  height: 100%;
+}
+
+.li {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ul .li {
+  position: relative;
+  /* margin: 0.5em 0; */
+  padding-left: 1.5em;
+}
+
+.ul .li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  /* font-size: 1.2em; */
+  color: #d2d2d2ff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.1em;
+  /* text-[12px] leading-[100%] font-normal */
+}
+
+.hidden {
+  max-height: 0;
+  opacity: 0;
+  transform: scaleY(0);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}

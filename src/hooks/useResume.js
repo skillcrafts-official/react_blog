@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useCallback, useMemo, useEffect } from "react";
-import { API_BASE_URL, API_DATA, API_ENDPOINTS } from "../constants";
+import { API_BASE_URL, API_DATA } from "../constants";
+import { API_ENDPOINTS } from "@/api/endpoints";
 
 export const useWorkSummary = (profile) => {
-    const [workSummary, setWorkSummary] = useState({});
+    const [workSummary, setWorkSummary] = useState([]);
     const [selectedUserId, setSelectedUserId] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -27,7 +28,9 @@ export const useWorkSummary = (profile) => {
             }
 
             const data = await response.json();
+            console.log(data)
             setWorkSummary(data);
+            console.log(workSummary)
             return data;
         } catch (error) {
             console.log('Failed to fetch with error:', error.message);
@@ -44,9 +47,10 @@ export const useWorkSummary = (profile) => {
 
     useEffect(() => {
         if (profile) {
+            console.log(profile)
             fetchWorkSummary();
         }
-    }, [profile, updateSelectedUserId, fetchWorkSummary]);
+    }, [profile, fetchWorkSummary]);
 
     const value = useMemo(() => ({
         /**
@@ -85,12 +89,6 @@ export const useWorkExperience = (initialData = {}) => {
         is_current: null,
         ...initialData
     });
-    // const [isLoading, setIsLoading] = useState(false);
-    // const [error, setError] = useState(null);
-
-    // const fetchWorkExperiences = useCallback(async () = {
-    //     set
-    // }, [])
 
     const update = useCallback((updates) => {
         setState(prev => ({...prev, ...updates}))
@@ -127,37 +125,76 @@ export const useWorkExperience = (initialData = {}) => {
     return value
 }
 
-export const useWorkResult = (initialData = {}) => {
-    const [state, setState] = useState({
-        id: null,
-        result: null,
-        ...initialData
-    });
+export const useWorkResult = (workExperience) => {
+    const [workResults, setWorkResults] = useState(workExperience.results.map((res) => res.result));
+    const [selectedWorkResult, setSelectedWorkResult] = useState(null);
+    const [isCreating, setIsCreating] = useState(false);
+    const [error, setError] = useState(null);
 
-    const update = useCallback((updates) => {
-        setState(prev => ({...prev, ...updates}))
+    const createWorkResult = useCallback(async (payload) => {
+        if (!selectedWorkResult) {
+            return ;
+        }
+        
+        setIsCreating(true);
+        setError(null);
+
+        try {            
+            const response = await fetch(
+                `${API_BASE_URL}${API_ENDPOINTS.RESUME.WORK_RESULT.CRUD}`,
+                API_DATA("POST", payload)
+            );
+            
+            if (!response.ok) {
+                throw new Error('Failed to add new work result');
+            }
+
+            const data = await response.json();
+            setWorkResults(data);
+            return data;
+            // console.log('Profile updated:', data);
+        } catch (error) {
+            console.error('Failed to add work result:', error);
+            setError('Ошибка добавлении результата к месту работы:', error.message);
+        } finally {
+            setIsCreating(false);
+        }
+    }, [selectedWorkResult])
+
+    const updateSelectedWorkResult = useCallback((result) => {
+        setSelectedWorkResult(result);
     }, [])
 
-    const reset = useCallback(() => {
-        setState({
-            id: null,
-            result: null,
-            ...initialData
-        })
-    }, [initialData])
+    useEffect(() => {
+        if (workExperience && selectedWorkResult) {
+            const payload = {
+                work_experience: workExperience.id,
+                result: selectedWorkResult,
+            }
+            createWorkResult(payload);
+        }
+    }, [workExperience, selectedWorkResult, createWorkResult])
 
     const value = useMemo(() => ({
         /**
          * data
          */
-        ...state,
+        workResults,
+        selectedWorkResult,
+        isCreating,
+        error,
         /**
          * methods
          */
-        update,
-        reset
+        updateSelectedWorkResult,
+        createWorkResult,
     }), [
-        state, update, reset
+        workResults,
+        selectedWorkResult,
+        isCreating,
+        error,
+        updateSelectedWorkResult,
+        createWorkResult,
     ])
 
     return value

@@ -1,0 +1,35 @@
+.paragraph {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    /* font-size: 21px;
+    line-height: 21px; */
+    /* margin: 30px 0px; */
+    color: #ffffffff;
+    width: fit-content;
+    height: fit-content;
+}
+
+.primary {
+    font-size: 16px;
+    line-height: 1.2em;
+    
+}
+
+.secondary {
+    font-size: 15px;
+    line-height: 1.2em;
+}
+
+.tertiary {
+    font-size: 14px;
+    line-height: 1.2em;
+}
+
+.quaternary {
+    font-size: 13px;
+    line-height: 1.2em;
+}
+
+.center {
+    text-align: center;
+}

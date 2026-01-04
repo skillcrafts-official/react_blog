@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { API_BASE_URL } from "@/constants";
 
-function ProtectedImage({ src, alt, className, fallback }) {
+function ProtectedImage({ src, alt, className, fallback, clickHandler = () => console.log('Click-cluck'), ...props }) {
     const [imageUrl, setImageUrl] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -78,7 +78,11 @@ function ProtectedImage({ src, alt, className, fallback }) {
 
     if (error || !imageUrl) {
         return fallback ? (
-            <img src={fallback} alt={alt} className={className} />
+            <img 
+                src={fallback}
+                alt={alt}
+                className={className}
+                onClick={() => clickHandler()}/>
         ) : (
             <div className={`image-error ${className}`}>
                 <span>⚠️</span>
@@ -87,9 +91,11 @@ function ProtectedImage({ src, alt, className, fallback }) {
     }
     return (
         <img
+            { ...props }
             src={imageUrl}
             alt={alt}
             className={className}
+            onClick={() => clickHandler()}
             onError={() => setError(true)}
         />
     )

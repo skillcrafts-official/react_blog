@@ -1,0 +1,38 @@
+/**
+* Масштабирование сетки задач
+* large - детальный план
+* medium - средний план
+* overview - общий план
+*/
+
+.task-box {
+    gap: 12px;
+    width: fit-content;
+    padding: 6px;
+}
+
+.task-box.detailview {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+}
+
+.task-box.medium {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+
+.task-box.overview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+}
+
+.task-box.listview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+}
+
+ /* className="flex flex-col flex-wrap justify-center items-start gap-5 max-w-200 " */

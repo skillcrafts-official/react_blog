@@ -1,9 +1,130 @@
 import { API_ENDPOINTS } from "@/api/endpoints";
 import { API_BASE_URL, API_DATA } from "@/constants";
+import { useWorkflowState } from "@/lib/providers/WorkflowProvider";
 import { useCallback, useEffect, useMemo, useState } from "react"
+import { useSearchParams } from "react-router-dom";
+
+export const useProject = (profile) => {
+    const [projects, setProjects] = useState([]);
+    const [selectedProject, setSelectedProject] = useState(null);
+    const [createdProject, setCreatedProject] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isUpdating, setIsUpdating] = useState(false);
+    const [error, setError] = useState(null);
+
+    const fetchAllUserProjects = useCallback(async () => {
+        if (!profile) {
+            return;
+        }
+
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            console.log(`${API_BASE_URL}${API_ENDPOINTS.WORKFLOWS.PROJECTS.GET_OR_POST}`);
+            const response = await fetch(
+                `${API_BASE_URL}${API_ENDPOINTS.WORKFLOWS.PROJECTS.GET_OR_POST}`,
+                API_DATA("GET")
+            )
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch!');
+            }
+
+            const data = await response.json()
+            setProjects(data)
+            return data;
+        } catch (error) {
+            console.log('Project list loading failed with error', error.message);
+            setError(error.message);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [profile]);
+
+    const updateUserProjects = useCallback(async (payload) => {
+        if (!profile || !createdProject){
+            return;
+        }
+
+        setIsUpdating(true);
+        setError(null);
+
+        try {
+            const response = await fetch(
+                `${API_BASE_URL}${API_ENDPOINTS.WORKFLOWS.PROJECTS.GET_OR_POST}`,
+                API_DATA("POST", payload)
+            )
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch!');
+            }
+
+            const data = await response.json()
+            setProjects(prev => [...prev, data?.name])
+        } catch (error) {
+            console.log('Updating project list failed with error', error.message);
+            setError(error.message);
+        } finally {
+            setIsUpdating(false);
+        }
+    }, [profile, createdProject])
+
+    const createProject = useCallback((project) => {
+        setCreatedProject(project);
+    }, [])
+
+    useEffect(() => {
+        if (profile) {
+            fetchAllUserProjects();
+        }
+    }, [profile, fetchAllUserProjects]);
+
+    useEffect(() => {
+        if (profile && createdProject) {
+            const payload = {
+                profile,
+                name: createdProject
+            }
+            updateUserProjects(payload);
+        }
+    }, [profile,createdProject, updateUserProjects])
+
+    const value = useMemo(() => ({
+        /**
+         * Data
+         */
+        projects,
+        selectedProject,
+        isLoading,
+        isUpdating,
+        error,
+        /**
+         * Methods
+         */
+        fetchAllUserProjects,
+        createProject,
+        updateUserProjects,
+    }), [
+        projects,
+        selectedProject,
+        isLoading,
+        isUpdating,
+        error,
+        fetchAllUserProjects,
+        createProject,
+        updateUserProjects,
+    ]);
+
+    return value;
+}
 
 export const useWorkflowTaskList = () => {
-    const [statusFilter, setStatusFilter] = useState('in_progress');
+    const workflowSearchParams = localStorage.getItem('workflowSearchParams')
+    // console.log(workflowSearchParams)
+    // console.log(searchParams.get('project'))
+    // console.log(searchParams.get('status'))
+    const [statusFilter, setStatusFilter] = useState(workflowSearchParams);
     const [taskList, setTaskList] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -13,6 +134,7 @@ export const useWorkflowTaskList = () => {
         setError(null);
 
         try {
+            console.log(`${API_BASE_URL}${API_ENDPOINTS.WORKFLOWS.TASKS.LIST(statusFilter)}`)
             const response = await fetch(
                 `${API_BASE_URL}${API_ENDPOINTS.WORKFLOWS.TASKS.LIST(statusFilter)}`,
                 API_DATA("GET")
@@ -33,8 +155,8 @@ export const useWorkflowTaskList = () => {
         }
     }, [statusFilter]);
 
-    const updateStatusFilter = useCallback((update) => {
-        setStatusFilter(update);
+    const updateStatusFilter = useCallback((searchParams) => {
+        setStatusFilter(searchParams);
     }, []);
 
     useEffect(() => {
@@ -447,6 +569,119 @@ export const useTaskStatus = (task, profile) => {
     return value;
 }
 
+export const useTaskTags = (task) => {
+    const [taskTags, setTaskTags] = useState(task?.tags);
+    const [selectedTaskTag, setSelectedTaskTag] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
+    const [isUpdating, setIsUpdating] = useState(false);
+    const [isCreating, setIsCreating] = useState(false);
+    const [error, setError] = useState(null);
+
+    const fetchAllTaskTags = useCallback(async () => {
+        if (!task) {
+            return;
+        }
+
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            const response = await fetch(
+                `${API_BASE_URL}${API_ENDPOINTS.WORKFLOWS.TASKS.TAGS.GET_OR_POST(task.id)}`,
+                API_DATA("GET")
+            );
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch!');
+            }
+
+            const data = await response.json()
+            setTaskTags(data);
+            return data;
+        } catch (error) {
+            console.log('Failed to load task tags with errors:', error.message);
+            setError(error.message);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [task])
+
+    const updateTaskTags = useCallback(async (payload) => {
+        if (!task || !selectedTaskTag) {
+            return ;
+        }
+
+        setIsUpdating(true);
+        setError(null);
+
+        try {
+            const response = await fetch(
+                `${API_BASE_URL}${
+                    API_ENDPOINTS.WORKFLOWS.TASKS.TAGS.GET_OR_POST(task.id)
+                }`, API_DATA("POST", payload)
+            );
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch!');
+            }
+
+            const data = await response.json();
+            setTaskTags(data);
+            return data;
+        } catch (error) {
+            console.log('Failed to update task tags with error:', error.message);
+            setError(error.message);
+        } finally {
+            setIsUpdating(false);
+        }
+    }, [task, selectedTaskTag])
+
+    const updateSelectedTaskTags = useCallback((params) => {
+        setSelectedTaskTag(params);
+    }, []);
+
+    useEffect(() => {
+        if (task) {
+            fetchAllTaskTags();
+        }
+    }, [task, fetchAllTaskTags]);
+
+    useEffect(() => {
+        if (task && selectedTaskTag) {
+            const payload = {
+                name: selectedTaskTag
+            };
+            updateTaskTags(payload);
+        }
+    }, [task, selectedTaskTag, updateTaskTags])
+
+    const value = useMemo(() => ({
+        /**
+         * Data
+         */
+        taskTags,
+        isLoading,
+        isCreating,
+        isUpdating,
+        error,
+        /**
+         * Methods
+         */
+        fetchAllTaskTags,
+        updateSelectedTaskTags
+    }), [
+        taskTags,
+        isLoading,
+        isCreating,
+        isUpdating,
+        error,
+        fetchAllTaskTags,
+        updateSelectedTaskTags
+    ]);
+
+    return value;
+}
+
 export const useAcceptanceCriteria = (task) => {
     const [acceptanceCriterias, setAcceptanceCriterias] = useState(task.criterias);
     const [selectedCriteria, setSelectedCriteria] = useState(null);
@@ -574,6 +809,80 @@ export const useAcceptanceCriteria = (task) => {
         updateSelectedCriteria,
         updateCriteriaDone,
         createAcceptanceCriteria,
+    ]);
+
+    return value;
+}
+
+export const useTaskProject = (task) => {
+    const [taskProject, setTaskProject] = useState(task?.project);
+    const [selectedTaskProject, setSelectedTaskProject] = useState({});
+    const [isUpdating, setIsUpdating] = useState(false);
+    const [error, setError] = useState(null);
+
+    const updateTaskProject = useCallback(async (payload) => {
+        if (!task) {
+            return;
+        }
+
+        setIsUpdating(true);
+        setError(null);
+
+        try {
+            const response = await fetch(
+                `${API_BASE_URL}${
+                    API_ENDPOINTS.WORKFLOWS.TASKS.PATCH_PROJECT(task.id)
+                }`, API_DATA("PATCH", payload)
+            );
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch!');
+            }
+
+            const data = await response.json();
+            setTaskProject(data);
+            return data;
+        } catch (error) {
+            console.log('Failed to update task privacy with error:', error.message);
+            setError(error.message);
+        } finally {
+            setIsUpdating(true);
+        }
+    }, [task])
+
+    const updateSelectedTaskProject = useCallback((params) => {
+        setSelectedTaskProject(params);
+    }, []);
+
+    useEffect(() => {
+        if (task, selectedTaskProject) {
+            const payload = {
+                project: selectedTaskProject?.id,
+            }
+            updateTaskProject(payload);
+        }
+    }, [task, selectedTaskProject, updateTaskProject]);
+
+    const value = useMemo(() => ({
+        /**
+         * Data
+         */
+        taskProject,
+        selectedTaskProject,
+        isUpdating,
+        error,
+        /**
+         * Methods
+         */
+        updateSelectedTaskProject,
+        updateTaskProject,
+    }), [
+        taskProject,
+        selectedTaskProject,
+        isUpdating,
+        error,
+        updateSelectedTaskProject,
+        updateTaskProject,
     ]);
 
     return value;

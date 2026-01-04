@@ -1,5 +1,5 @@
 function Span({ children, variant = "primary", ...props }) {
-    const baseStyles = "font-roboto w-fit select-none"
+    const baseStyles = "flex font-roboto w-fit h-fit select-none"
 
     const variants = {
         primary: "text-[#d2d2d2ff] text-[12px] leading-[100%] font-normal",

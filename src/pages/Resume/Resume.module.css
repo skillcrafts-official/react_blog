@@ -1,27 +1,57 @@
-.resume {
+.resume-v2 {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr auto;
+    grid-template-columns: 1fr 1px 2fr;
+    /* grid-template-rows: auto auto; */
     grid-template-areas:
-        "first first"
-        "second third";
-    width: 800px;
-    padding: 10px;
-    gap: 20px;
+        "profile vl resume"
+        "profile vl resume";
+    gap: 15px;
+    margin: 5px;
+    padding: 15px;
+    /* border: 1px solid #ffffff55; */
+    border-radius: 12px;
     @media (max-width: 800px) {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(4, auto);
+        grid-template-rows: repeat(2, auto);
         grid-template-areas:
-            "first"
-            "third"
-            "fourth"
-            "second";
+            "profile"
+            "resume";
         width: 100%;
+        gap: 0px;
     }
 }
 
+.divider {
+    grid-area: vl;
+    background-color: #ffffff55;
+    width: 1px;
+}
+
+.header {
+    display: grid;
+    /* grid-template-columns: 1fr; */
+    grid-template-rows: auto;
+    gap: 1em;
+    width: 100%;
+    height: fit-content;
+}
+
+.resume {
+    grid-area: resume;
+    display: grid;
+    grid-template-columns: 1fr;
+    /* grid-template-areas:
+        "first"
+        "second"
+        "third"; */
+    width: 100%;
+    /* padding: 10px; */
+    gap: 20px;
+    align-content: start;
+}
+
 .first {
-    grid-area: first;
+    /* grid-area: first; */
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -29,7 +59,7 @@
 }
 
 .second {
-    grid-area: second;
+    /* grid-area: second; */
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -37,7 +67,7 @@
 }
 
 .third {
-    grid-area: third;
+    /* grid-area: third; */
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -45,9 +75,30 @@
 }
 
 .fourth {
-    grid-area: fourth;
+    /* grid-area: fourth; */
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 20px;
+}
+
+.avatar {
+    /* grid-area: profile; */
+    justify-self: center;
+    display: flex;
+    /* position: absolute; */
+    /* left: 130px; */
+    /* top: 75px; */
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 3px solid #828282ff;
+    border-radius: 50%;
+    /* z-index: 0; */
+}
+
+.profile {
+    grid-area: profile;
+    justify-self: center;
+    display: flex;
 }

@@ -3,12 +3,24 @@ import Checkbox from "@/components/ui/Choice/Checkbox"
 import Input from "@/components/ui/Input/Input"
 import Textarea from "@/components/ui/Input/Textarea"
 import Span from "@/components/ui/Label/Span"
+import { useProject } from "@/hooks/useWorkfolw"
+import { useGlobalState } from "@/lib/providers/GlobalProvider"
+import { useWorkflowState } from "@/lib/providers/WorkflowProvider"
 import { useEffect } from "react"
 import { Form, useActionData, useNavigate } from "react-router-dom"
 
 function TaskEditableView() {
     const actionData = useActionData();
     const navigate = useNavigate();
+    const { userId } = useGlobalState();
+    const { projects } = useProject(userId);
+    const { taskProject } = useWorkflowState();
+
+    const prjList = Object.fromEntries(
+        projects.map(item => [item.name, item.id])
+    )
+
+    console.log(new URLSearchParams(localStorage.getItem('workflowSearchParams')))
 
     useEffect(() => {
         if (actionData?.success) {
@@ -24,17 +36,18 @@ function TaskEditableView() {
                 // encType="multipart/form-data">
                 action={"/workflows/create-task"}
                 method="POST">
+                <Input type="number"
+                    name="project"
+                    placeholder="Выберите проект из списка ниже"
+                    value={prjList[taskProject]}
+                    required
+                    getFloppy={false}/>
                 <Input 
                     type="text"
                     name="todo"
                     // value={email}
                     placeholder="Введите название задачи"
                     required
-                    // requirements={EMAIL_REQUIREMENTS}
-                    // fieldValue={email}
-                    // state={emailValidation}
-                    // onChange={handleEm/ailChange}
-                    // variant={email ? isEmailValid === true ? 'valid': 'invalid' : 'primary'}
                     getFloppy={false}/>
                 <Textarea 
                     // type="password"

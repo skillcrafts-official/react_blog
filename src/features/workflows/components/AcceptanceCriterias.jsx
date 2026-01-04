@@ -35,7 +35,7 @@ function AcceptanceCriterias({
     }
 
     return (
-        <div className="flex flex-col gap-y-3 w-fit h-fit">
+        <div className="flex flex-col gap-y-3 w-full h-fit">
             {/* <ul className={`flex flex-row flex-wrap`}> */}
             <Span variant='secondary-invert'>Критерии готовности</Span>
                 {rengerAcceptanceCriterias()}

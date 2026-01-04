@@ -7,6 +7,7 @@ import { useGlobalState } from "@/lib/providers/GlobalProvider";
 import { useEffect, useMemo, useState } from "react";
 import UserList from '@/pages/User/UserList';
 import Span from './ui/Label/Span';
+import WorkflowProvider from '@/lib/providers/WorkflowProvider';
 
 function Layout() {
   const location = useLocation().pathname;
@@ -29,8 +30,10 @@ function Layout() {
             </header>
             {/\/users/.test(location.pathname) && <Sidebar />}
             {/\/users\/[\d]+/.test(location.pathname) && <UserList/>}
-            <main className="main mb-7">
-              <Outlet className="w-full"/>
+            <main className="main mb-7 max-w-200">
+              <WorkflowProvider>
+                <Outlet className="w-full"/>
+              </WorkflowProvider>
             </main>
             
         </div>

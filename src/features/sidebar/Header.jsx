@@ -7,11 +7,12 @@ import { useEffect, useState } from "react";
 
 import Input from "@/components/ui/Input/Input";
 import { useGlobalState } from "@/lib/providers/GlobalProvider";
-import { LINKS } from "@/constants";
+import { API_BASE_URL, API_DATA, LINKS } from "@/constants";
 import { ROUTES } from "@/constants";
 import FloppyDisk from "@/components/ui/Button/FloppyDisk";
 import { useUserList, useUserView } from '@/hooks/useUser';
 import ProtectedImage from '@/components/ui/Image/ProtectedImage';
+import { API_ENDPOINTS } from '@/api/endpoints';
 
 function Header() {
     const actionData = useActionData();
@@ -33,8 +34,10 @@ function Header() {
     
     console.log(userView?.avatar);
     const hasAccessToken = localStorage.getItem('auth:accessToken')?.length > 0 ? true : false
+    const hasRefreshToken = localStorage.getItem('auth:refreshToken')?.length > 0 ? true : false
     const hasGuestToken = localStorage.getItem('auth:guestToken')?.length > 0 ? true : false
     
+    console.log(hasRefreshToken, localStorage.getItem('auth:refreshToken'))
     // const handleKeyDown = (e) => {
     //     if (e.key === 'Enter') {
     //         // e.preventDefault();
@@ -70,33 +73,56 @@ function Header() {
         }
     }
 
+    const refreshToken = async () => {
+        if (hasRefreshToken) {
+            const payload = {
+                refresh: localStorage.getItem('auth:refreshToken')
+            }
+            const response = await fetch(
+                `${API_BASE_URL}${API_ENDPOINTS.AUTH.REFRESH}`,
+                API_DATA("POST", payload)
+            )
+
+            if (!response.ok){
+                return ;
+            }
+            const data = await response.json();
+            console.log(localStorage.getItem('auth:accessToken'))
+            localStorage.setItem('auth:accessToken', data?.access);
+            console.log(localStorage.getItem('auth:accessToken'));
+            console.log('window.location', window.location)
+            window.location.reload();
+        }
+        return ;
+    }
+
     return (
         // <div className="flex flex-row justify-between w-dvw items-center p-4 bg-[#0d0d0dff] shadow-header rounded-b-[12px]">
         <div className={styles.menubox}>
             {/* {(hasAccessToken | hasGuestToken) ? <nav className='header'> */}
             <nav className='header'>
                 <ul className="flex flex-row flex-wrap-reverse gap-y-1 gap-x-4 justify-center items-center">
-                    <li className="text-white text-[11px] font-[400] font-roboto uppercase">
+                    <li className="text-white text-[12px] font-[400] font-roboto uppercase">
                         <NavLink to='/'>
                             {/* // onClick={handleProfileClick}> */}
                             Главная
                         </NavLink>
                     </li>
-                    {(hasAccessToken | hasGuestToken) && <li className="text-white text-[11px] font-[400] font-roboto uppercase">
+                    {(hasAccessToken | hasGuestToken) && <li className="text-white text-[12px] font-[400] font-roboto uppercase">
                         <NavLink to={LINKS.PROFILES.DETAIL(localStorage.getItem('auth:userId'))}
                             onClick={handleProfileClick}
                             >
                             Мой Профиль
                         </NavLink>
                     </li>}
-                    {hasAccessToken && <li className="text-white text-[11px] font-[400] font-roboto uppercase">
+                    {hasAccessToken && <li className="text-white text-[12px] font-[400] font-roboto uppercase">
                         <NavLink to={LINKS.RESUME.DETAIL(localStorage.getItem('auth:userId'))}
                             // onClick={handleProfileClick}
                             >
                             Моё резюме
                         </NavLink>
                     </li>}
-                    {hasAccessToken && <li className="text-white text-[11px] font-[400] font-roboto uppercase">
+                    {hasAccessToken && <li className="text-white text-[12px] font-[400] font-roboto uppercase">
                         <NavLink to={ROUTES.WORKFLOWS.USER.LIST}
                             // to={LINKS.RESUME.DETAIL(localStorage.getItem('auth:userId'))}
                             // onClick={handleProfileClick}
@@ -104,13 +130,13 @@ function Header() {
                             Мои дела
                         </NavLink>
                     </li>}
-                    {hasAccessToken && <li className="text-white text-[11px] font-[400] font-roboto uppercase">
+                    {hasAccessToken && <li className="text-white text-[12px] font-[400] font-roboto uppercase">
                         {/* <NavLink to={ROUTES.SUBSCRIBES.LIST}> */}
                         <NavLink to={ROUTES.USERS.LIST}>
                             Подписки
                         </NavLink>
                     </li>}
-                    {hasGuestToken && <li className="text-white text-[11px] font-[400] font-roboto uppercase">
+                    {hasGuestToken && <li className="text-white text-[12px] font-[400] font-roboto uppercase">
                         <NavLink to={ROUTES.USERS.LIST}
                             // onClick={handleProfileClick}
                             >
@@ -129,11 +155,13 @@ function Header() {
             <ProtectedImage 
                 src={userView?.avatar}
                 alt="User Avatar"
+                title='Обновить токен доступа'
                 className={styles.avatar}
-                fallback={defaultAvatar}/>
+                fallback={defaultAvatar}
+                clickHandler={refreshToken}/>
             <nav className='header'>
                 <ul className="flex flex-row flex-wrap-reverse gap-y-1 gap-x-3 justify-center items-center">
-                    <li className="text-white text-[11px] font-[400] font-roboto uppercase text-center">
+                    <li className="text-white text-[12px] font-[400] font-roboto uppercase leading-[1em] text-center">
                     {hasAccessToken && 
                         (location.pathname === '/' && 
                             <NavLink to={ROUTES.POSTS.EDITOR}>
@@ -143,17 +171,23 @@ function Header() {
                         location.pathname === '/workflows' &&
                             <NavLink to={ROUTES.WORKFLOWS.USER.CREATE_TASK}>
                                 Создать задачу
+                            </NavLink>
+                         ||
+                        /\/resume\//.test(location.pathname) &&
+                            <NavLink to={location}>
+                                Изменить резюме
                             </NavLink>)}
                     </li>
-                    <li className="text-white text-[11px] font-[400] font-roboto uppercase text-center">
-                        {hasAccessToken && 
+                    <li className="text-white text-[12px] font-[400] font-roboto uppercase text-center">
+                    {hasAccessToken && 
+                        (location.pathname === '/' && 
                             <NavLink to={`/search${searchParams ? '?' : ''}${searchParams}`} 
                             // className="text-white text-[11px] font-[400] font-roboto uppercase"
                                 >
                                 Найти
-                            </NavLink>}
+                            </NavLink>)}
                     </li>
-                    <li className="text-white text-[11px] font-[400] font-roboto uppercase text-center">
+                    <li className="text-white text-[12px] font-[400] font-roboto uppercase text-center">
                         {isLogin == "logout" ? (
                             <NavLink to={"/auth/login"}
                                 onClick={() => handleSidebarModalView(true)}>

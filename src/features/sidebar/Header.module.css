@@ -11,7 +11,8 @@
     border-radius: 0 0 12px 12px;
     box-shadow: var(--shadow-header);
     background-color: #0d0d0dff;
-    padding: 16px;
+    padding: 0.25em 16px;
+    transition: all 0.5s ease-in-out;
     /* z-index: 0; */
     @media (max-width: 800px) {
         width: 100vw;
@@ -22,12 +23,14 @@
 /* flex flex-row justify-between w-dvw items-center p-4 bg-[#0d0d0dff] shadow-header rounded-b-[12px] */
 .avatar {
     display: grid;
+    cursor: pointer;
     /* align-self: end; */
     object-fit: cover;
     aspect-ratio: 1 / 1;
     height: 4em;
     border-radius: 50%;
     border: 3px solid var(--valid-color);
+    transition: all 0.25s ease-in-out;
     @media (min-width: 600px) {
         height: 2em;
         border: 2px solid var(--valid-color);

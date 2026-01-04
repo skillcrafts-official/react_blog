@@ -18,6 +18,8 @@
     padding: 2px 5px;
     transition: all 0.25s ease-in-out;
     user-select: none;
+    text-align: center;
+    line-height: 1.75em;
 }
 
 .secondary:hover {
@@ -30,7 +32,7 @@
     transform: scale(0.95);
 }
 
-.secondary-invert {
+.secondary.invert {
     cursor: pointer;
     background-color: #d2d2d2aa;
     color: #181818ff;
@@ -41,19 +43,36 @@
     user-select: none;
 }
 
-.secondary-invert:hover {
+.secondary.invert:hover {
     background-color: #d2d2d2ff;
 }
 
-.secondary-invert:active {
+.secondary.invert:active {
     animation-duration: 50ms;
     transform: scale(0.95);
+}
+
+.link {
+    cursor: pointer;
+    color: #d2d2d2aa;
+    font-size: 12px;
+    font-weight: 400;
+    /* padding: 2px 5px; */
+    transition: all 0.25s ease-in-out;
+    user-select: none;
+    text-align: center;
+    line-height: 1.75em;
+}
+
+.link:hover {
+    /* background-color: #d2d2d2aa; */
+    color: #107effff;
 }
 
 .tertiary {
     cursor: pointer;
     color: #d2d2d2aa;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 400;
     padding: 2px 5px;
     transition: all 0.25s ease-in-out;
@@ -62,7 +81,6 @@
 
 .tertiary:hover {
     background-color: #d2d2d2aa;
-    color: #181818ff;
 }
 
 .tertiary:active {

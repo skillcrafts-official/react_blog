@@ -50,7 +50,9 @@ const router = createBrowserRouter([
         element: <Profile />,
         loader: combinedProfileLoader
       },
-      { path: ROUTES.WORKFLOWS.USER.LIST, element: <Workflow /> },
+      { 
+        path: ROUTES.WORKFLOWS.USER.LIST,
+        element: <Workflow /> },
       {
         path: ROUTES.WORKFLOWS.USER.CREATE_TASK,
         element: <TaskEditableView />,

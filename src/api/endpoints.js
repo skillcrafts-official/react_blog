@@ -50,16 +50,16 @@ export const API_ENDPOINTS = {
     }
   },
   RESUME: {
-    DETAIL: (profileId) => `/resume/?profile=${profileId}`,
+    DETAIL: (profileId) => `/resume/?profile_id=${profileId}`,
     WORK_EXPERIENCE: {
       CR: (profileId) => 
         `/resume/work-experiences/?profile=${profileId}`,
+      POST: `/resume/work-experiences/`,
       PATCH: (experienceId) => 
         `/resume/work-experiences/${experienceId}/`
     },
     WORK_RESULT: {
-      CRUD: (experienceId) => 
-        `/resume/work-experiences/${experienceId}/results/`,
+      CRUD: `/resume/work-experiences/results/`,
       PATCH: (resultId, userId) => 
         `/resume/work-experiences/results/${resultId}/${userId}/`
     },
@@ -78,10 +78,17 @@ export const API_ENDPOINTS = {
     }
   },
   WORKFLOWS: {
+    PROJECTS: {
+      GET_OR_POST: `/workflows/projects/`
+    },
     TASKS: {
-      LIST: (status) => `/workflows/tasks/?status=${status}`,
+      LIST: (searchParams) => `/workflows/tasks/?${searchParams}`,
       CREATE: `/workflows/tasks/`,
-      GET_OR_PATCH_OR_DELETE: (task) => `/workflows/tasks/${task}/`
+      GET_OR_PATCH_OR_DELETE: (task) => `/workflows/tasks/${task}/`,
+      PATCH_PROJECT: (task) => `/workflows/tasks/${task}/projects/`,
+      TAGS: {
+        GET_OR_POST: (task) => `/workflows/tasks/${task}/tags/`
+      }
     },
     CRITERIAS: {
       GET_OR_POST: (task) => `/workflows/tasks/${task}/acceptance-criterias/`,

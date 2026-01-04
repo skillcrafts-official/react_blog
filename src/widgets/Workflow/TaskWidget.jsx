@@ -6,16 +6,19 @@ import remarkGfm from 'remark-gfm';
 import Title from '@/components/ui/Label/Title'
 import Textarea from '@/components/ui/Input/Textarea'
 import PrivacyCheckBox from '@/features/compliance/PrivacyCheckBox';
-import { useTaskPriority, useTaskPrivacy, useTaskTitle, useTaskStatus } from '@/hooks/useWorkfolw';
+import { useTaskPriority, useTaskPrivacy, useTaskTitle, useTaskStatus, useProject, useTaskTags } from '@/hooks/useWorkfolw';
 import { useGlobalState } from '@/lib/providers/GlobalProvider';
 import PriorityCheckBox from '@/features/workflows/components/PriorityCheckBox';
 import StatusCheckBox from '@/features/workflows/components/StatusCheckBox';
 import AcceptanceCriterias from '@/features/workflows/components/AcceptanceCriterias';
 import TimeEntries from '@/features/workflows/components/TimeEntries';
+import ProjectTag from '@/features/workflows/components/ProjectTag';
+import TaskTag from '@/features/workflows/components/TaskTag';
 
-function TaskWidget({ task }) {
+function TaskWidget({ variant = 'large', task }) {
     const { userId } = useGlobalState();
-    
+    const { projects } = useProject(userId);
+
     const {
         taskPrivacy, selectedTaskPrivacy,
         isUpdating: privacyUpdating, error: privacyError,
@@ -36,6 +39,11 @@ function TaskWidget({ task }) {
         isUpdating: statusUpdating, error: statusError,
         updateSelectedTaskStatus
     } = useTaskStatus(task, userId);
+    const {
+        taskTags,
+        isLoading, isUpdating, error,
+        updateSelectedTaskTags
+    } = useTaskTags(task);
     // const {
     //     hoursSpent, hoursSpents, 
     //     isUpdating: timeEntryUpdating, error: timeEntryError,
@@ -91,7 +99,7 @@ function TaskWidget({ task }) {
         // </div>
         // <div className="flex flex-col w-full rounded-t-[12px]">
         <div key={task.id}
-            className="grid gap-3 bg-[#202020ff] rounded-[12px] shadow-simple-post">
+            className={styles['task-box']}>
             {/* <img className="rounded-t-[12px]"
                 src={"poster || defaultPoster"} alt="poster" /> */}
             {/* <nav className='flex flex-col p-2 justify-between items-center'>
@@ -109,7 +117,7 @@ function TaskWidget({ task }) {
             </nav> */}
             <div className='flex flex-col justify-between items-center rounded-[12px]'>
                 <header className='flex flex-col flex-wrap gap-x-2 py-3 w-full items-center bg-[#0d0d0dff]  rounded-t-[12px]'>
-                    <div className="flex flex-row flex-wrap gap-x-3 px-4 w-full items-center justify-center sd:justify-between">
+                    {['detailview', 'medium'].includes(variant) && <div className="flex flex-row flex-wrap gap-x-3 px-4 w-full items-center justify-center sd:justify-between">
                         <TimeEntries
                             task={task}
                             />
@@ -119,7 +127,7 @@ function TaskWidget({ task }) {
                             checkflow={PRIVACY_FLOW}
                             verbose_names={PRIVACIES}
                             handleChange={updateSelectedTaskPrivacy}/>
-                    </div>
+                    </div>}
                     <PriorityCheckBox
                         currentValue={taskPriority}
                         currentField={"priority"}
@@ -129,7 +137,7 @@ function TaskWidget({ task }) {
                         handleOnClickNext={updateSelectedTaskPriority}/>
                     
                 </header>
-                <main className='flex flex-col gap-y-3 py-3 px-4 w-full items-center rounded-[12px]'>
+                <main className='flex flex-col gap-y-3 py-3 px-4 w-full h-full items-center rounded-[12px]'>
                     <div className='flex flex-row flex-wrap gap-3'>
                         <Title variant='tertiary'>
                             {`[#${task.id}]`}
@@ -146,31 +154,32 @@ function TaskWidget({ task }) {
                                 getFloppy isManuallySaved
                                 fetchFunc={updateSelectedTaskTitle}/>)}
                     </div>
-                    {true && 
-                    <ReactMarkdown 
-                        remarkPlugins={[remarkGfm]}
-                        components={{
-                          p: ({node, ...props}) => (
-                            <Span {...props} />
-                          ),
-                          h1: ({node, ...props}) => <h1 className="text-3xl font-bold mt-6 mb-4" {...props} />,
-                          h2: ({node, ...props}) => <h2 className="text-2xl font-bold mt-5 mb-3" {...props} />,
-                          h3: ({node, ...props}) => <h3 className="text-xl font-bold mt-4 mb-2" {...props} />,
-                          ul: ({node, ...props}) => <ul className="list-disc pl-5 mb-4" {...props} />,
-                          ol: ({node, ...props}) => <ol className="list-decimal pl-5 mb-4" {...props} />,
-                          li: ({node, ...props}) => <Span variant='secondary' {...props} />,
-                          a: ({node, ...props}) => <a className="text-blue-600 hover:underline" {...props} />,
-                          code: ({node, inline, ...props}) => 
-                            inline 
-                              ? <code className="bg-gray-100 px-1 py-0.5 rounded" {...props} />
-                              : <code className="block bg-gray-800 text-white p-4 rounded my-2" {...props} />,
-                        }}>
-                        {/* className="font-roboto text-[#d2d2d2ff] font-[400] text-[14px] leading-[21px] tracking-[0%]"> */}
-                        {task.description}
-                    </ReactMarkdown>}
-                    <AcceptanceCriterias task={task}/>
+                    {variant === 'detailview' && <div className='flex flex-col'>
+                        <ReactMarkdown 
+                            remarkPlugins={[remarkGfm]}
+                            components={{
+                              p: ({node, ...props}) => (
+                                <Span {...props} />
+                              ),
+                              h1: ({node, ...props}) => <h1 className="text-3xl font-bold mt-6 mb-4" {...props} />,
+                              h2: ({node, ...props}) => <h2 className="text-2xl font-bold mt-5 mb-3" {...props} />,
+                              h3: ({node, ...props}) => <h3 className="text-xl font-bold mt-4 mb-2" {...props} />,
+                              ul: ({node, ...props}) => <ul className="list-disc pl-5 mb-4" {...props} />,
+                              ol: ({node, ...props}) => <ol className="list-decimal pl-5 mb-4" {...props} />,
+                              li: ({node, ...props}) => <Span variant='secondary' {...props} />,
+                              a: ({node, ...props}) => <a className="text-blue-600 hover:underline" {...props} />,
+                              code: ({node, inline, ...props}) => 
+                                inline 
+                                  ? <code className="bg-gray-100 px-1 py-0.5 rounded" {...props} />
+                                  : <code className="block bg-gray-800 text-white p-4 rounded my-2" {...props} />,
+                            }}>
+                            {/* className="font-roboto text-[#d2d2d2ff] font-[400] text-[14px] leading-[21px] tracking-[0%]"> */}
+                            {task.description}
+                        </ReactMarkdown>
+                    </div>}
+                    {variant === 'detailview' && <AcceptanceCriterias task={task}/>}
                 </main>
-                <footer className='flex flex-col py-3 px-4 w-full gap-2 items-center rounded-b-[12px] bg-[#181818ff]'>
+                {['detailview', 'medium'].includes(variant) && <footer className='flex flex-col py-3 px-4 w-full gap-2 items-center rounded-b-[12px] bg-[#181818ff]'>
                     {/* <ul role='meta-data'>
                         <li>
                             <div className="flex flex-row flex-wrap gap-x-3 items-center">
@@ -187,13 +196,22 @@ function TaskWidget({ task }) {
                         checkflow={Object.keys(STATUSES)}
                         verbose_names={STATUSES}
                         handleChange={updateSelectedTaskStatus}/>
-                    <div className="flex flex-col flex-wrap gap-x-3 items-center">
-                        <span className="font-lato text-[#828282ff] text-[12px] font-[400]">
-                            создано {new Date(task.date_created).toLocaleString()}</span>
-                        {task.date_updated && <span className="font-lato text-[#828282ff] text-[12px] font-[400]">
-                            <i>последнее изменение {new Date(task.date_updated).toLocaleString()}</i></span>}
-                        {/* <div className="w-[6px] h-[6px] bg-white rounded-full"></div> */}
-                        
+                    <div className='grid grid-cols-3'>
+                        <div className='flex flex-row flex-wrap'>
+                            <ProjectTag task={task}></ProjectTag>
+                        </div>
+                        <div className="flex flex-col flex-wrap gap-x-3 justify-center items-center">
+                            <span className="font-lato text-[#828282ff] text-[12px] font-[400] text-center">
+                                создано {new Date(task.date_created).toLocaleString()}</span>
+                            {task.date_updated && <span className="font-lato text-[#828282ff] text-[12px] font-[400] text-center">
+                                <i>последнее изменение {new Date(task.date_updated).toLocaleString()}</i></span>}
+                            {/* <div className="w-[6px] h-[6px] bg-white rounded-full"></div> */}
+                            
+                        </div>
+                        <div className='flex flex-row flex-wrap'>
+                            <TaskTag taskTags={taskTags} 
+                                handleUpdate={updateSelectedTaskTags}/>
+                        </div>
                     </div>
                     {/* <div className="flex md:flex-row flex-col gap-3 justify-between">
                         
@@ -202,7 +220,7 @@ function TaskWidget({ task }) {
                                 редактировать
                         </Link>
                     </div> */}
-                </footer>
+                </footer>}
             </div>
         </div>
         // </div>

@@ -2,6 +2,7 @@ import styles from "./Textarea.module.css"
 import { useState } from "react";
 import Checkbox from "../Choice/Checkbox";
 import FloppyDisk from "../Button/FloppyDisk";
+import WasteBasket from "../Button/WasteBasket";
 
 function Textarea({
         rows = 5,
@@ -38,13 +39,18 @@ function Textarea({
                     {isProtected && <Checkbox forItem={props.name} privacyValue={privacyValue}/>}
                 </label>
                 <div className="flex flex-row justify-around items-start gap-3">
-                    <textarea { ...props } value={value} onChange={handleInput} rows={rows}
-                        className={`${styles.input} ${styles.effects} ${styles[variant]}`}>
+                    <textarea value={value} onChange={handleInput} rows={rows}
+                        className={`${styles.input} ${styles.effects} ${styles[variant]}`}
+                        { ...props }>
                     </textarea>
                     {getFloppy && <div className={`${styles.floppy} ${(isManuallySaved) ? '' : styles.adaptive}`}
                             onClick={handleSave}>
                             <FloppyDisk />
                         </div>}
+                    {/* <p className="text-[18px] m-0 p-0 w-fit text-white">&#128465;&#128270;&#10000;</p> */}
+                    <div className={`${styles.floppy}`}>
+                        <WasteBasket/>
+                    </div>
                 </div>
             </div>
         </>
